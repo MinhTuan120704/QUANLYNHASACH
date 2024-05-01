@@ -75,5 +75,83 @@ namespace GUI
             customerManagementButton.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             customerManagementButton.Cursor = Cursors.Arrow;
         }
+
+        private void invoiceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void invoiceButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            invoiceButton.Background = new SolidColorBrush(Color.FromRgb(252, 222, 222));
+            invoiceButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            invoiceButton.Cursor = Cursors.Hand;
+        }
+
+        private void invoiceButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            invoiceButton.Background = new SolidColorBrush(Color.FromRgb(252, 255, 255));
+            invoiceButton.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            invoiceButton.Cursor = Cursors.Arrow;
+        }
+
+        private void settingButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingPage newPage = new SettingPage();
+            this.NavigationService.Navigate(newPage);
+        }
+
+        private void settingButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            settingButton.Background = new SolidColorBrush(Color.FromRgb(252, 222, 222));
+            settingButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            settingButton.Cursor = Cursors.Hand;
+        }
+
+        private void settingButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            settingButton.Background = new SolidColorBrush(Color.FromRgb(252, 255, 255));
+            settingButton.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            settingButton.Cursor = Cursors.Arrow;
+        }
+
+        private void statisticButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void statisticButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            statisticButton.Background = new SolidColorBrush(Color.FromRgb(252, 222, 222));
+            statisticButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            statisticButton.Cursor = Cursors.Hand;
+        }
+
+        private void statisticButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            statisticButton.Background = new SolidColorBrush(Color.FromRgb(252, 255, 255));
+            statisticButton.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            statisticButton.Cursor = Cursors.Arrow;
+        }
+
+        private void signOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoginPage newPage = new LoginPage();
+            this.NavigationService.Navigate(newPage);
+        }
+
+        private void signOutButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            signOutButton.Background = new SolidColorBrush(Color.FromRgb(252, 222, 222));
+            signOutButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            signOutButton.Cursor = Cursors.Hand;
+        }
+
+        private void signOutButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            signOutButton.Background = new SolidColorBrush(Color.FromRgb(252, 255, 255));
+            signOutButton.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            signOutButton.Cursor = Cursors.Arrow;
+        }
     }
 }

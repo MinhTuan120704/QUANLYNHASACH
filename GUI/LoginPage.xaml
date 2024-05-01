@@ -37,12 +37,12 @@
                 <materialDesign:PackIcon Kind="AccountCircle" Width="110" Height="85" HorizontalAlignment="Center"/>
                 <!-- Thêm phần tử Grid để chứa các phần tử con -->
                 <TextBlock Text="Đăng nhập" 
-           Height="70"
-           FontSize="48"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Top"
-           Padding="10" 
-           FontFamily="Verdana" Margin="0,90,0,0" />
+                           Height="70"
+                           FontSize="48"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Padding="10" 
+                           Margin="0,90,0,0" FontFamily="Verdana" />
                 <Border 
                 Width="563" 
                 Height="78"

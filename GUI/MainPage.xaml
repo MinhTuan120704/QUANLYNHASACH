@@ -16,6 +16,7 @@
                     <ImageBrush ImageSource="background.jpg" />
                 </Rectangle.Fill>
             </Rectangle>
+            
 
             <Border Width="1666"
                      Height="869"
@@ -63,18 +64,18 @@
                                     Background="#FFFFFF"
                                     Content="Quản lý sách" 
                                     HorizontalAlignment="Right" 
-                                    Width="421" 
+                                    Width="422" 
                                     Height="116"
                                     FontFamily="Verdana" 
                                     FontSize="32"
                                     BorderBrush="{x:Null}" 
                                     Click="bookManagementButton_Click" 
                                     MouseEnter="bookManagementButton_MouseEnter" 
-                                    MouseLeave="bookManagementButton_MouseLeave">
+                                    MouseLeave="bookManagementButton_MouseLeave" >
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>
@@ -98,7 +99,28 @@
                                     Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
                             </Border>
                             <materialDesign:PackIcon Kind="InvoiceTextCheck" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
-
+                            <Button x:Name="invoiceButton"
+                                    Background="#FFFFFF"
+                                    Content="Hóa đơn" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="invoiceButton_Click" MouseEnter="invoiceButton_MouseEnter" MouseLeave="invoiceButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </Grid>
                     </Border>
 
@@ -113,7 +135,28 @@
                                     Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
                             </Border>
                             <materialDesign:PackIcon Kind="AccountSecure" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
-
+                            <Button x:Name="settingButton"
+                                    Background="#FFFFFF"
+                                    Content="Cài đặt" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="settingButton_Click" MouseEnter="settingButton_MouseEnter" MouseLeave="settingButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </Grid>
                     </Border>
 
@@ -132,7 +175,7 @@
                                 Background="#FFFFFF"
                                 Content="Khách hàng" 
                                 HorizontalAlignment="Right" 
-                                Width="421" 
+                                Width="422" 
                                 Height="116"
                                 FontFamily="Verdana" 
                                 FontSize="32"
@@ -143,7 +186,7 @@
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>
@@ -167,6 +210,28 @@
                                      Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
                             </Border>
                             <materialDesign:PackIcon Kind="Equalizer" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="statisticButton"
+                                    Background="#FFFFFF"
+                                    Content="Thống kê" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="statisticButton_Click" MouseEnter="statisticButton_MouseEnter" MouseLeave="statisticButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </Grid>
                     </Border>
 
@@ -181,11 +246,34 @@
                                      Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
                             </Border>
                             <materialDesign:PackIcon Kind="Settings" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="signOutButton"
+                                    Background="#FFFFFF"
+                                    Content="Đăng xuất" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="signOutButton_Click" MouseEnter="signOutButton_MouseEnter" MouseLeave="signOutButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </Grid>
                     </Border>
 
                 </Grid>
             </Border>
+       
         </Grid>
     </Grid>
 </Page>
