@@ -1,0 +1,279 @@
+﻿<Page x:Class="GUI.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="Main" Height="1080" Width="1920">
+
+    <Grid>
+        <Grid>
+            <!-- Background gradient -->
+            <Rectangle>
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="background.jpg" />
+                </Rectangle.Fill>
+            </Rectangle>
+            
+
+            <Border Width="1666"
+                     Height="869"
+                     Background="#FFB4B4"
+                     BorderThickness="1"  
+                     BorderBrush="Black" 
+                     CornerRadius="40">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15"
+                               Direction ="-90" 
+                               RenderingBias ="Quality" 
+                               ShadowDepth ="2" 
+                               Color ="LightGray" />
+                </Border.Effect>
+
+                <Grid Width="1287"
+                      Height="596">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="536" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="536" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="116" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="116" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="116" />
+                    </Grid.RowDefinitions>
+
+                    <Border x:Name="bookManagementBorder"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            CornerRadius="25,25,25,25"
+                            Background="#FFFFFF">
+                        <Grid>
+                            <Border Width="115"
+                                    Height="116"
+                                    CornerRadius="25,0,0,25"
+                                    Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            </Border>
+                            <materialDesign:PackIcon Kind="Book" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="bookManagementButton"
+                                    Background="#FFFFFF"
+                                    Content="Quản lý sách" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" 
+                                    Click="bookManagementButton_Click" 
+                                    MouseEnter="bookManagementButton_MouseEnter" 
+                                    MouseLeave="bookManagementButton_MouseLeave" >
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="0"
+                            Grid.Row="2"
+                            CornerRadius="25,25,25,25"
+                            Background="#FFFFFF">
+                        <Grid>
+                            <Border Width="115"
+                                    Height="116"
+                                    CornerRadius="25,0,0,25"
+                                    Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            </Border>
+                            <materialDesign:PackIcon Kind="InvoiceTextCheck" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="invoiceButton"
+                                    Background="#FFFFFF"
+                                    Content="Hóa đơn" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="invoiceButton_Click" MouseEnter="invoiceButton_MouseEnter" MouseLeave="invoiceButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="0"
+                            Grid.Row="4"
+                            CornerRadius="25,25,25,25"
+                            Background="#FFFFFF">
+                        <Grid>
+                            <Border Width="115"
+                                    Height="116"
+                                    CornerRadius="25,0,0,25"
+                                    Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            </Border>
+                            <materialDesign:PackIcon Kind="AccountSecure" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="settingButton"
+                                    Background="#FFFFFF"
+                                    Content="Cài đặt" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="settingButton_Click" MouseEnter="settingButton_MouseEnter" MouseLeave="settingButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                             Grid.Row="0"
+                             CornerRadius="25,25,25,25"
+                             Background="#FFFFFF">
+                        <Grid>
+                            <Border Width="115"
+                                     Height="116"
+                                     CornerRadius="25,0,0,25"
+                                     Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            </Border>
+                            <materialDesign:PackIcon Kind="PersonGroup" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="customerManagementButton"
+                                Background="#FFFFFF"
+                                Content="Khách hàng" 
+                                HorizontalAlignment="Right" 
+                                Width="422" 
+                                Height="116"
+                                FontFamily="Verdana" 
+                                FontSize="32"
+                                BorderBrush="{x:Null}" Click="customerManagementButton_Click" 
+                                    MouseEnter="customerManagementButton_MouseEnter" 
+                                    MouseLeave="customerManagementButton_MouseLeave" 
+                                >
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                             Grid.Row="2"
+                             CornerRadius="25,25,25,25"
+                             Background="#FFFFFF">
+                        <Grid>
+                            <Border Width="115"
+                                     Height="116"
+                                     CornerRadius="25,0,0,25"
+                                     Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            </Border>
+                            <materialDesign:PackIcon Kind="Equalizer" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="statisticButton"
+                                    Background="#FFFFFF"
+                                    Content="Thống kê" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="statisticButton_Click" MouseEnter="statisticButton_MouseEnter" MouseLeave="statisticButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                             Grid.Row="4"
+                             CornerRadius="25,25,25,25"
+                             Background="#FFFFFF">
+                        <Grid>
+                            <Border Width="115"
+                                     Height="116"
+                                     CornerRadius="25,0,0,25"
+                                     Background="#FCDEDE" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            </Border>
+                            <materialDesign:PackIcon Kind="Settings" Width="62" Height="64" HorizontalContentAlignment="Center" Margin="26,0,0,0" VerticalAlignment="Center" />
+                            <Button x:Name="signOutButton"
+                                    Background="#FFFFFF"
+                                    Content="Đăng xuất" 
+                                    HorizontalAlignment="Right" 
+                                    Width="422" 
+                                    Height="116"
+                                    FontFamily="Verdana" 
+                                    FontSize="32"
+                                    BorderBrush="{x:Null}" Click="signOutButton_Click" MouseEnter="signOutButton_MouseEnter" MouseLeave="signOutButton_MouseLeave">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="0,25,25,0"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Border>
+       
+        </Grid>
+    </Grid>
+</Page>

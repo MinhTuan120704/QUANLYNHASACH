@@ -1,0 +1,271 @@
+﻿<Page x:Class="GUI.BookManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="BookManagement" Height="1080" Width="1920"
+      Background="#FCDEDE">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
+
+
+        </Grid.RowDefinitions>
+
+        <Border x:Name="home"
+            Grid.Column="0"
+            Grid.Row="0"  MouseEnter="home_MouseEnter" MouseLeave="home_MouseLeave" 
+            >
+            <Button x:Name="homeButton"
+                Width="100" 
+                Height="100" 
+                BorderBrush="{x:Null}" 
+                Background="{x:Null}"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" Click="homeButton_Click" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <materialDesign:PackIcon Kind="HomeOutline" Width="100" Height="100"/>
+            </Button>
+        </Border>
+
+        <Border Grid.Column="1"
+            Grid.Row="0"
+            Height="96"
+            Width="906"
+            CornerRadius="45"
+            Background="#FEF7F7" HorizontalAlignment="Left">
+            <Grid>
+                <materialDesign:PackIcon Kind="Search" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="52,0,0,0"/>
+                <Button x:Name="filterButton"
+                    Width="50" 
+                    Height="50" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Margin="0,0,20,0" 
+                    BorderBrush="{x:Null}" 
+                    Background="{x:Null}" Click="filterButton_Click" MouseEnter="filterButton_MouseEnter" MouseLeave="filterButton_MouseLeave">
+                    <materialDesign:PackIcon Kind="Equaliser" Width="50" Height="50" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+        </Border>
+
+        <Button x:Name="adminButton"
+                Grid.Column="2"
+                Grid.Row="0"
+                BorderBrush="{x:Null}" 
+                Background="{x:Null}" Click="adminButton_Click" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <materialDesign:PackIcon Kind="AccountCircleOutline" Width="102" Height="100"  VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </Button>
+
+        <Grid Grid.Column="0"
+          Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+
+            <TextBlock  Grid.Row="1"
+                    Text="Thêm sách mới" 
+                    FontFamily="Verdana" 
+                    FontSize="28" 
+                    FontWeight="Bold" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"/>
+
+            <TextBlock  Grid.Row="2"
+                    Text="Xóa sách" 
+                    FontFamily="Verdana" 
+                    FontSize="28" 
+                    FontWeight="Bold" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"/>
+        </Grid>
+        <Border Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Height="900"
+            Width="1592"
+            CornerRadius="45"
+            Background="#FFEEEE" 
+            HorizontalAlignment="Left" 
+            Margin="0,0,0,59" 
+            />
+        <Border x:Name="filterBorder"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="890"
+            Height="810"
+            Background="#FEF7F7"
+            CornerRadius="20"
+            Visibility="Visible">
+            <Grid>
+                <Button x:Name="closeButton"
+                    Width="45" 
+                    Height="45" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0, 12, 12, 0"
+                    BorderBrush="{x:Null}" 
+                    Background="{x:Null}" Click="closeButton_Click" MouseEnter="closeButton_MouseEnter" MouseLeave="closeButton_MouseLeave" >
+                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Grid Margin="95,61,0,0" Height="50" VerticalAlignment="Top">
+                    <materialDesign:PackIcon Kind="Filter" Width="50" Height="50"   />
+                    <TextBlock Text="Lọc" FontSize="28" FontFamily="Verdana" Margin="60,6,0,0"  ></TextBlock>
+                </Grid>
+                <Grid Width="681" Height="437" Margin="95, 167, 114, 206">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Thể loại" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <Menu   Width="410" Height="77"  
+                            HorizontalAlignment="Right" 
+                            Background="#F3F0F0">
+                            <MenuItem Header="Any" 
+                                  Width="410" Height="77">
+                                <MenuItem Header="asd" 
+                                      Width="410" Height="77"  >
+                                </MenuItem>
+                                <MenuItem Header="asd" 
+                                      Width="410" Height="77"  >
+                                </MenuItem>
+                                <MenuItem Header="asd" 
+                                      Width="410" Height="77"  >
+                                </MenuItem>
+                            </MenuItem>
+
+                        </Menu>
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+        <Border x:Name="adminBorder"
+            Width="395"
+            Height="310"
+            Background="#FFEEEE"
+            CornerRadius="20"
+            Visibility="Visible" Grid.Column="1" Margin="1265,0,0,650" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <materialDesign:PackIcon Kind="AccountCircleOutline" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="28,0,0,0"/>
+                    <Button 
+                        Width="292" 
+                        Content="Admin"
+                        Height="50" 
+                        FontSize="28"
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Margin="83,0,0,0" 
+                        BorderBrush="{x:Null}" 
+                        Background="{x:Null}">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <materialDesign:PackIcon Kind="AccountSecure" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                    <Button x:Name="settingButton"
+                        Width="292" 
+                        Content="Cài đặt"
+                        Height="40" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Margin="95,0,0,0" 
+                        BorderBrush="{x:Null}" 
+                        Background="{x:Null}" Click="settingButton_Click" MouseEnter="settingButton_MouseEnter" MouseLeave="settingButton_MouseLeave">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <materialDesign:PackIcon Kind="Logout" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                    <Button x:Name="logOutButton"
+                        Width="292" 
+                        Content="Đăng xuất"
+                        Height="40" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Margin="95,0,0,0" 
+                        BorderBrush="{x:Null}" 
+                        Background="{x:Null}" Click="logOutButton_Click" MouseEnter="logOutButton_MouseEnter" MouseLeave="logOutButton_MouseLeave">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
