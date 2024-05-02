@@ -12,12 +12,12 @@ namespace DAL.Context
 {
     public class DatabaseContext : DbContext
     {
-        DatabaseContext()
+        public DatabaseContext()
         {
 
         }
         
-        DatabaseContext(DbContextOptions options) : base(options) 
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) 
         {
 
         }

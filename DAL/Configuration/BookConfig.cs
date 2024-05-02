@@ -22,7 +22,6 @@ namespace DAL.Configuration
             builder.Property(p => p.Publisher).HasMaxLength(50).IsRequired();
             builder.Property(p => p.Quantity).IsRequired();
             builder.Property(p => p.UnitPrice).IsRequired();
-            builder.Property(p => p.UnitSoldPrice).IsRequired();
         }
     }
 }

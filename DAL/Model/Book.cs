@@ -22,8 +22,6 @@ namespace DAL.Model
 
         public int UnitPrice { get; set; }
 
-        public int UnitSoldPrice { get; set; }
-
         public List<BookOrder> bookOrdersB { get; set; }
 
         public List<ReceiptDetail> receiptDetailsB { get; set; }

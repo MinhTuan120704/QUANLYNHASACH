@@ -20,8 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj" />
-  </ItemGroup>
-
 </Project>
