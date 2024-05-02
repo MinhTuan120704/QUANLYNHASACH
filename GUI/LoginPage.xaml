@@ -88,7 +88,7 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="{x:Null}" Opacity="0.6" 
-                    GotFocus="passWord_GotFocus" 
+                    GotFocus="passWord_GotFocus" TextChanged="passWord_TextChanged" 
 
                     />
                         <Border Width="90"
@@ -106,7 +106,8 @@
                 Background="#FCDEDE" Margin="378,446,378,54"
                 Click="loginButton_Click"
                 MouseEnter="loginButton_MouseEnter" 
-                MouseLeave="loginButton_MouseLeave" >
+                MouseLeave="loginButton_MouseLeave" DragEnter="loginButton_Click" 
+                IsDefault="True">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}">

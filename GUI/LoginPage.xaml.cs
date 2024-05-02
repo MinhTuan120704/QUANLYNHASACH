@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BLL;
 
 namespace GUI
 {
@@ -20,9 +21,11 @@ namespace GUI
     /// </summary>
     public partial class LoginPage : Page
     {
+        Login login = new Login();
         public LoginPage()
         {
             InitializeComponent();
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -73,10 +76,21 @@ namespace GUI
             //newWindow.Show();
 
             //this.Close();
-            MainPage newPage = new MainPage();
+            if(login.CheckLoginBLL(user.Text.ToString(),passWord.Text.ToString()) == 0)
+            {
+                MessageBox.Show("không tồn tại");
+            }
+            else 
+            {
+                MainPage newPage = new MainPage();
+                // Điều hướng đến trang mới
+                this.NavigationService.Navigate(newPage);
+            }
 
-            // Điều hướng đến trang mới
-            this.NavigationService.Navigate(newPage);
+        }
+
+        private void passWord_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }

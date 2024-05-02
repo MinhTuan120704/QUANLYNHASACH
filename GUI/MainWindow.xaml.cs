@@ -19,6 +19,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
             MainFrame.Content = new LoginPage();
         }
     }

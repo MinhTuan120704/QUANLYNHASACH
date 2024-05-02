@@ -20,14 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Model\" />
-    <Folder Include="Context\" />
-  </ItemGroup>
-
 </Project>
