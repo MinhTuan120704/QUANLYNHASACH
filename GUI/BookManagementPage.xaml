@@ -98,13 +98,14 @@
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
 
-            <TextBlock  Grid.Row="1"
+            <TextBlock x:Name="addBook"
+                    Grid.Row="1"
                     Text="Thêm sách mới" 
                     FontFamily="Verdana" 
                     FontSize="28" 
                     FontWeight="Bold" 
                     VerticalAlignment="Center" 
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center" MouseLeftButtonUp="addBook_MouseLeftButtonUp" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave"/>
 
             <TextBlock  Grid.Row="2"
                     Text="Xóa sách" 
@@ -114,16 +115,7 @@
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"/>
         </Grid>
-        <Border Grid.Column="1"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Height="900"
-            Width="1592"
-            CornerRadius="45"
-            Background="#FFEEEE" 
-            HorizontalAlignment="Left" 
-            Margin="0,0,0,59" 
-            />
+
         <Border x:Name="filterBorder"
             Grid.ColumnSpan="2"
             Grid.RowSpan="2"
@@ -138,7 +130,7 @@
                     Height="45" 
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0, 12, 12, 0"
+                    Margin="0, 12, 12, 0"   
                     BorderBrush="{x:Null}" 
                     Background="{x:Null}" Click="closeButton_Click" MouseEnter="closeButton_MouseEnter" MouseLeave="closeButton_MouseLeave" >
                     <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
@@ -167,15 +159,15 @@
                             HorizontalAlignment="Right" 
                             Background="#F3F0F0">
                             <MenuItem Header="Any" 
-                                  Width="410" Height="77">
+                                    Width="410" Height="77">
                                 <MenuItem Header="asd" 
-                                      Width="410" Height="77"  >
+                                        Width="410" Height="77"  >
                                 </MenuItem>
                                 <MenuItem Header="asd" 
-                                      Width="410" Height="77"  >
+                                        Width="410" Height="77"  >
                                 </MenuItem>
                                 <MenuItem Header="asd" 
-                                      Width="410" Height="77"  >
+                                        Width="410" Height="77"  >
                                 </MenuItem>
                             </MenuItem>
 
@@ -183,9 +175,20 @@
                     </Grid>
 
                 </Grid>
-
             </Grid>
         </Border>
+
+        <Border Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Height="900"
+            Width="1592"
+            CornerRadius="45"
+            Background="#FFEEEE" 
+            HorizontalAlignment="Left" 
+            Margin="0,0,0,59" 
+            />
+        
         <Border x:Name="adminBorder"
             Width="395"
             Height="310"
