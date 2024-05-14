@@ -124,12 +124,18 @@ namespace GUI
 
         private void adminButton_MouseEnter(object sender, MouseEventArgs e)
         {
-            adminButton.Cursor = Cursors.Hand;
+            this.Cursor = Cursors.Hand;
         }
 
         private void adminButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            adminButton.Cursor = Cursors.Arrow;
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void addBook_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            AddBookWindow newWindow = new AddBookWindow();
+            newWindow.Show();
         }
     }
 }

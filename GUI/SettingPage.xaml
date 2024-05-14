@@ -104,7 +104,7 @@
             VerticalAlignment="Top"
             Margin="0,0,0,59">
             <Grid>
-                <TextBlock Text="Cài đặt tài khoản" FontSize="40" FontWeight="ExtraBold" FontStyle="Italic" FontFamily="Verdana"></TextBlock>
+                <TextBlock Text="Cài đặt tài khoản" FontSize="40" Height="60" VerticalAlignment="Top" FontWeight="ExtraBold" FontStyle="Italic" FontFamily="Verdana" Margin="77,106,16,0"></TextBlock>
             </Grid>
         </Border> 
             

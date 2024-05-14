@@ -1,0 +1,136 @@
+﻿<Page x:Class="GUI.StaticPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="BookManagement" Height="1080" Width="1920"
+      Background="#FCDEDE">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="347" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="141" />
+            <RowDefinition Height="*" />
+
+
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Column="0"
+            Grid.Row="0"
+            >
+            <Button
+                Width="100"
+                Height="100"
+                Background="#FCDEDE"
+                HorizontalAlignment="Left"
+                Margin="64, 0, 0, 0"
+                VerticalAlignment="Center" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <materialDesign:PackIcon Kind="HomeOutline" Width="100" Height="100"/>
+            </Button>
+        </Border>
+
+        <Button
+                Grid.Column="2"
+                Grid.Row="0"
+                HorizontalAlignment="Right"
+                Background="#FCDEDE"
+                Margin="0, 0, 45, 0"
+                VerticalAlignment="Center"
+               >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <materialDesign:PackIcon Kind="AccountCircleOutline" Width="102" Height="100"  VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </Button>
+
+
+        <Border Grid.Column="1"
+            Grid.Row="1"
+            Height="900"
+            Width="1534"
+            CornerRadius="45"
+            Background="#FFEEEE"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="0,10,0,0">
+
+        </Border>
+
+        <Border Grid.Column="1"
+            Height="80"
+            Width="336"
+            CornerRadius="15"
+            Background="#FFEEEE"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" Margin="200,0,0,0"/>
+
+        <Border Grid.Column="1"
+          Height="80"
+          Width="336"
+          CornerRadius="15"
+          Background="#FFEEEE"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center" Margin="727,0,0,0"/>
+        <Grid Margin="10,34,1401,31" Grid.Column="1" RenderTransformOrigin="0.414,0.526">
+            <TextBlock Margin="14,10,6,24" TextAlignment="Center" FontSize="30" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>Từ ngày
+            </TextBlock>
+        </Grid>
+        <Grid Margin="541,34,851,31" Grid.Column="1" RenderTransformOrigin="0.453,0.559">
+            <TextBlock Margin="10,10,-4,22" TextAlignment="Center" FontSize="30" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>Đến ngày
+            </TextBlock>
+        </Grid>
+        <Border Grid.Column="1"
+          Height="80"
+          Width="190"
+          CornerRadius="50"
+          Background="#FFEEEE"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center" Margin="1174,0,0,0">
+            <TextBlock FontSize="30" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Tìm Kiếm</TextBlock>
+        </Border>
+
+        <Border
+          Height="80"
+          Width="222"
+          CornerRadius="50"
+          Background="#6420AA"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Top" Margin="0,763,0,0" Grid.Row="1">
+            <TextBlock FontSize="30" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Xuất báo cáo</TextBlock>
+        </Border>
+
+    </Grid>
+</Page>
