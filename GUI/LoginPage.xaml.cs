@@ -76,11 +76,16 @@ namespace GUI
             //newWindow.Show();
 
             //this.Close();
-            
+            if (login.CheckLoginBLL(user.Text.ToString(), passWord.Text.ToString()) == 0)
+            {
+                MessageBox.Show("không tồn tại");
+            }
+            else
+            {
                 MainPage newPage = new MainPage();
                 // Điều hướng đến trang mới
                 this.NavigationService.Navigate(newPage);
-
+            }
         }
 
         private void passWord_TextChanged(object sender, TextChangedEventArgs e)
