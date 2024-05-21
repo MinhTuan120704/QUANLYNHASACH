@@ -6,9 +6,14 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Login" Height="1080" Width="1920">
+        Title="Login" >
 
-    <Frame x:Name="MainFrame">
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1920" Height="1046" >
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden">
 
-    </Frame>
+            </Frame>
+        </Grid>
+    </Viewbox>
+    
 </Window>

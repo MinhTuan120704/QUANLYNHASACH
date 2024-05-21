@@ -19,8 +19,16 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            WindowState = WindowState.Maximized;
+            //this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            // Đặt trạng thái cửa sổ khi khởi động
+            this.WindowState = WindowState.Maximized;
             MainFrame.Content = new LoginPage();
+            //HideTitleBar();
+        }
+
+        public void HideTitleBar()
+        {
+            this.WindowStyle = WindowStyle.None;
         }
     }
 }
