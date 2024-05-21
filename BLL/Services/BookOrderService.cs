@@ -20,7 +20,7 @@ namespace BLL.Services
         }
         public bool AddBookOrder(BookOrder bookorder)
         {
-            _bookOrderRepo = new AddBookOrder(bookorder);
+            _bookOrderRepo.AddBookOrder(bookorder);
             return true;
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL.Services;
+using DAL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +45,29 @@ namespace GUI
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
+
+            string BookName = bookName.Text; 
+            string BookType = bookType.Text;
+            string Author = author.Text;
+            string Publisher = publisher.Text; 
+            int Quantity = int.Parse(quantity.Text); 
+            int UnitPrice = int.Parse(unitPrice.Text); 
+
+            // Tạo đối tượng Book mới
+            Book newBook = new Book()
+            {
+                BookName = BookName,
+                BookType = BookType,
+                Author = Author,
+                Publisher = Publisher,
+                Quantity = Quantity,
+                UnitPrice = UnitPrice
+            };
+
+            BookService bookService = new BookService();
+            bookService.AddBook(newBook);
+
+            // Đóng cửa sổ này sau khi thêm sách
             this.Close();
         }
 

@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="AddBookWindow" Height="1000" Width="890">
-    <Grid>
-        <Border x:Name="filterBorder"
+        Title="AddBookWindow" >
+    <Viewbox Stretch="Uniform" >
+        <Grid Height="1000" Width="890">
+            <Border x:Name="filterBorder"
                 Background="#FEF7F7"
                 CornerRadius="20"
                 Visibility="Visible">
-            <Grid>
-                <Button x:Name="closeButton"
+                <Grid>
+                    <Button x:Name="closeButton"
                     Width="45" 
                     Height="45" 
                     HorizontalAlignment="Right"
@@ -21,30 +22,30 @@
                     Margin="0, 12, 12, 0"   
                     BorderBrush="{x:Null}" 
                     Background="{x:Null}" Click="closeButton_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" >
-                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Grid Margin="95,30,0,0" Height="50" VerticalAlignment="Top">
-                    <TextBlock Text="Thêm sách mới" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
-                </Grid>
-                <Grid Margin="95,120,95,120">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <TextBlock Text="Tên sách" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                        <TextBox x:Name="bookName"
+                        <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Grid Margin="95,30,0,0" Height="50" VerticalAlignment="Top">
+                        <TextBlock Text="Thêm sách mới" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
+                    </Grid>
+                    <Grid Margin="95,120,95,120">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Tên sách" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                            <TextBox x:Name="bookName"
                     BorderThickness="0" 
                     FontSize="28" 
                     FontFamily="Verdana" 
@@ -52,11 +53,11 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="#F3F0F0" />
-                    </Grid>
+                        </Grid>
 
-                    <Grid Grid.Row="1">
-                        <TextBlock Text="Thể loại" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                        <TextBox x:Name="bookType"
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="Thể loại" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                            <TextBox x:Name="bookType"
                     BorderThickness="0" 
                     FontSize="28" 
                     FontFamily="Verdana" 
@@ -64,11 +65,11 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="#F3F0F0"/>
-                    </Grid>
+                        </Grid>
 
-                    <Grid Grid.Row="2">
-                        <TextBlock Text="Tác giả" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                        <TextBox x:Name="author"
+                        <Grid Grid.Row="2">
+                            <TextBlock Text="Tác giả" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                            <TextBox x:Name="author"
                     BorderThickness="0" 
                     FontSize="28" 
                     FontFamily="Verdana" 
@@ -76,11 +77,11 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="#F3F0F0"/>
-                    </Grid>
+                        </Grid>
 
-                    <Grid Grid.Row="3">
-                        <TextBlock Text="Nhà xuất bản" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                        <TextBox x:Name="publisher"
+                        <Grid Grid.Row="3">
+                            <TextBlock Text="Nhà xuất bản" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                            <TextBox x:Name="publisher"
                     BorderThickness="0" 
                     FontSize="28" 
                     FontFamily="Verdana" 
@@ -88,11 +89,27 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="#F3F0F0"/>
-                    </Grid>
+                        </Grid>
 
-                    <Grid Grid.Row="4">
-                        <TextBlock Text="Số lượng" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                        <TextBox x:Name="quantity"
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="41*"/>
+                                <ColumnDefinition Width="29*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Số lượng" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="quantity"
+                    BorderThickness="0" 
+                    FontSize="28" 
+                    FontFamily="Verdana" 
+                    Margin="200,15,0,15" 
+                    HorizontalContentAlignment="Stretch" 
+                    VerticalContentAlignment="Center" 
+                    Background="#F3F0F0" Grid.ColumnSpan="2"/>
+                        </Grid>
+
+                        <Grid Grid.Row="5">
+                            <TextBlock Text="Giá nhập" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                            <TextBox x:Name="unitPrice"
                     BorderThickness="0" 
                     FontSize="28" 
                     FontFamily="Verdana" 
@@ -100,22 +117,10 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="#F3F0F0"/>
+                        </Grid>
                     </Grid>
-
-                    <Grid Grid.Row="5">
-                        <TextBlock Text="Giá nhập" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                        <TextBox x:Name="unitPrice"
-                    BorderThickness="0" 
-                    FontSize="28" 
-                    FontFamily="Verdana" 
-                    Margin="200,15,0,15" 
-                    HorizontalContentAlignment="Stretch" 
-                    VerticalContentAlignment="Center" 
-                    Background="#F3F0F0"/>
-                    </Grid>
-                </Grid>
-                <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
-                    <Button x:Name="add"
+                    <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                        <Button x:Name="add"
                         Width="144"
                         Height="64"
                         BorderThickness="0"
@@ -134,23 +139,30 @@
                                 </Style>
                             </Button.Resources>
                             <Grid>
-                            <TextBlock Foreground="#FEF7F7"
+                                <TextBlock Foreground="#FEF7F7"
                                     Text="Thêm"
                                     FontSize="28" 
                                     FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
                             </Grid>
-                    </Button>
-                    <TextBlock x:Name="cancel" 
+                        </Button>
+                        <TextBlock x:Name="cancel" 
                             Foreground="#290F75"
                             Text="Hủy" 
                             Width="80"
-                            
                             FontSize="28" 
-                            FontFamily="Verdana" Margin="460,0,0,0" VerticalAlignment="Center"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" TextAlignment="Center" MouseLeftButtonUp="add_Click"/>
+                            FontFamily="Verdana" 
+                            Margin="460,0,0,0" 
+                            TextAlignment="Center"   
+                            VerticalAlignment="Center" 
+                            MouseEnter="event_MouseEnter" 
+                            MouseLeave="event_MouseLeave" 
+                            MouseLeftButtonUp="closeButton_Click"/>
+                    </Grid>
+
                 </Grid>
-                
-            </Grid>
-        </Border>
-    </Grid>
+            </Border>
+        </Grid>
+    </Viewbox>
+
 </Window>
