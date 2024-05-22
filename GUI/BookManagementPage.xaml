@@ -12,7 +12,7 @@
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition  />
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
@@ -179,22 +179,44 @@
         </Border>
 
         <Border Grid.Column="1"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Height="900"
-            Width="1592"
-            CornerRadius="45"
-            Background="#FFEEEE" 
-            HorizontalAlignment="Left" 
-            Margin="0,0,0,59" 
-            />
-        
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        Height="900"
+        Width="1592"
+        CornerRadius ="0,0,45,45"
+        Background="#FFEEEE" 
+        HorizontalAlignment="Left" 
+        Margin="0,0,0,59">
+            <ListView x:Name="BooksListView" BorderThickness="0" Background="Transparent" FontFamily="Verdana" FontSize="24" Foreground="Black">
+                <ListView.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="0,0,45,45"/>
+                        <Setter Property="Background" Value="#FFEEEE"/>
+                    </Style>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn  Header="Book Name" DisplayMemberBinding="{Binding BookName}" />
+                        <GridViewColumn  Header="Book Type" DisplayMemberBinding="{Binding BookType}" />
+                        <GridViewColumn  Header="Author" DisplayMemberBinding="{Binding Author}" />
+                        <GridViewColumn  Header="Publisher" DisplayMemberBinding="{Binding Publisher}" />
+                        <GridViewColumn  Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
+                        <GridViewColumn  Header="Unit Price" DisplayMemberBinding="{Binding UnitPrice}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+
         <Border x:Name="adminBorder"
             Width="395"
             Height="310"
             Background="#FFEEEE"
             CornerRadius="20"
-            Visibility="Visible" Grid.Column="1" Margin="1265,0,0,650" Grid.Row="1" Grid.ColumnSpan="2">
+            Visibility="Collapsed" Grid.Column="1" Margin="1265,0,0,650" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

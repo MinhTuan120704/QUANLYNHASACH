@@ -1,5 +1,9 @@
-﻿using System;
+﻿using BLL.IServices;
+using BLL.Services;
+using DAL.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +22,32 @@ namespace GUI
     /// <summary>
     /// Interaction logic for BookManagementPage.xaml
     /// </summary>
+    public class AutoWidthGridViewColumn : GridViewColumn
+    {
+        public AutoWidthGridViewColumn()
+        {
+            WidthProperty.OverrideMetadata(typeof(AutoWidthGridViewColumn), new FrameworkPropertyMetadata(null, new CoerceValueCallback(OnCoerceWidth)));
+        }
+
+        private static object OnCoerceWidth(DependencyObject o, object baseValue)
+        {
+            return double.NaN;
+        }
+    }
+
     public partial class BookManagementPage : Page
     {
+        //public List<Book> Books { get; set; }
+        public ObservableCollection<Book> Books { get; set; }
         public BookManagementPage()
         {
             InitializeComponent();
+            BookService bookService = new BookService();
+            Books = new ObservableCollection<Book>(bookService.GetAllBook());
+            BooksListView.ItemsSource = Books;
+
         }
+                
 
         private bool isAdminBorderVisible = false;
         private void home_MouseEnter(object sender, MouseEventArgs e)
