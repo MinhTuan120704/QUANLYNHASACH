@@ -21,6 +21,7 @@ namespace GUI
     /// </summary>
     public partial class AddBookWindow : Window
     {
+
         public AddBookWindow()
         {
             InitializeComponent();
@@ -46,12 +47,18 @@ namespace GUI
         private void add_Click(object sender, RoutedEventArgs e)
         {
 
-            string BookName = bookName.Text; 
+            string BookName = bookName.Text;
+            bookName.Text = "";
             string BookType = bookType.Text;
+            bookType.Text = "";
             string Author = author.Text;
-            string Publisher = publisher.Text; 
-            int Quantity = int.Parse(quantity.Text); 
-            int UnitPrice = int.Parse(unitPrice.Text); 
+            author.Text = "";
+            string Publisher = publisher.Text;
+            publisher.Text = "";
+            int Quantity = int.Parse(quantity.Text);
+            quantity.Text = "";
+            int UnitPrice = int.Parse(unitPrice.Text);
+            unitPrice.Text = "";
 
             // Tạo đối tượng Book mới
             Book newBook = new Book()
@@ -71,5 +78,9 @@ namespace GUI
             this.Close();
         }
 
+        private void closeBorder_addBook(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

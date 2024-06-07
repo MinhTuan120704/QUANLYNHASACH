@@ -1,6 +1,7 @@
 ﻿using DAL.Context;
 using DAL.IRepo;
 using DAL.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace DAL.Repo
 
         public List<Book> GetAllFromDB()
         {
-            return _context.Books.ToList();
+            return _context.Books.AsNoTracking().ToList();
         }
 
         public bool UpdateBook(Book book)

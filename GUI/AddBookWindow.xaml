@@ -125,7 +125,7 @@
                         Height="64"
                         BorderThickness="0"
                         Background="#290F75"   
-                        IsDefault="True" Margin="700,0,0,0" Click="add_Click" DragEnter="add_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+                        IsDefault="True" Margin="700,0,0,0" Click="add_Click" DragEnter="add_Click" >
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}">
@@ -154,10 +154,9 @@
                             FontFamily="Verdana" 
                             Margin="460,0,0,0" 
                             TextAlignment="Center"   
-                            VerticalAlignment="Center" 
-                            MouseEnter="event_MouseEnter" 
-                            MouseLeave="event_MouseLeave" 
-                            MouseLeftButtonUp="closeButton_Click"/>
+                            VerticalAlignment="Center" MouseLeftButtonUp="closeBorder_addBook" 
+                            
+                            />
                     </Grid>
 
                 </Grid>
