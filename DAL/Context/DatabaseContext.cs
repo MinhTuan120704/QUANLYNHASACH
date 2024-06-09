@@ -45,7 +45,7 @@ namespace DAL.Context
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=MSI\\SNNAS;Database=QuanLyNhaSach;Trusted_Connection=True;TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer("Server=MSI;Database=QuanLyNhaSach;Trusted_Connection=True;TrustServerCertificate=true");
             }
         }
     }
