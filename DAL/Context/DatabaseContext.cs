@@ -29,6 +29,7 @@ namespace DAL.Context
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<ReceiptDetail> ReceiptDetails { get; set; }
+        public virtual DbSet<Constraints> Constraints { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +40,7 @@ namespace DAL.Context
             modelBuilder.ApplyConfiguration(new OrderConfig());
             modelBuilder.ApplyConfiguration(new ReceiptConfig());
             modelBuilder.ApplyConfiguration(new ReceiptDetailConfig());
+            modelBuilder.ApplyConfiguration(new ConstraintsConfig());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
