@@ -1,8 +1,11 @@
-﻿<Window x:Class="GUI.AddBill"
+﻿<Window x:Class="GUI.SuaHoaDon"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Thêm hóa đơn" Height="995" Width="1455"
-        Background="#FEF6F6">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="SuaHoaDon" Height="995" Width="1455">
     <Grid>
         <DataGrid AutoGenerateColumns="False" Name="dataGridDetails" Margin="76,193,76,193" Width="1303" Height="593" Background="#FFFFFF">
             <DataGrid.RowHeaderStyle>
@@ -103,6 +106,4 @@
         </Grid>
 
     </Grid>
-
 </Window>
-

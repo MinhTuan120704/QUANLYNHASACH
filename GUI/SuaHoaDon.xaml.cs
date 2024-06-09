@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for AddCustomerWD.xaml
+    /// Interaction logic for SuaHoaDon.xaml
     /// </summary>
-    public partial class AddCustomerWD : Window
+    public partial class SuaHoaDon : Window
     {
-        public AddCustomerWD()
+        public SuaHoaDon()
         {
             InitializeComponent();
         }
