@@ -24,5 +24,49 @@ namespace GUI
         {
             InitializeComponent();
         }
+        private void event_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void event_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+
+        }
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage newPage = new MainPage();
+
+
+            this.NavigationService.Navigate(newPage);
+        }
+
+        private bool isAdminBorderVisible = false;
+        private void adminButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isAdminBorderVisible)
+            {
+                adminBorder.Visibility = Visibility.Visible;
+                isAdminBorderVisible = true;
+            }
+            else
+            {
+                adminBorder.Visibility = Visibility.Hidden;
+                isAdminBorderVisible = false;
+            }
+        }
+
+        private void settingButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingPage newPage = new SettingPage();
+            this.NavigationService.Navigate(newPage);
+        }
+
+        private void logOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoginPage newPage = new LoginPage();
+            this.NavigationService.Navigate(newPage);
+        }
     }
 }
