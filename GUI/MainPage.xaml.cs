@@ -78,7 +78,8 @@ namespace GUI
 
         private void invoiceButton_Click(object sender, RoutedEventArgs e)
         {
-
+            BillPage newPage = new BillPage();
+            this.NavigationService.Navigate(newPage);
         }
 
         private void invoiceButton_MouseEnter(object sender, MouseEventArgs e)
@@ -117,7 +118,8 @@ namespace GUI
 
         private void statisticButton_Click(object sender, RoutedEventArgs e)
         {
-
+            StaticPage newPage = new StaticPage();
+            this.NavigationService.Navigate(newPage);
         }
 
         private void statisticButton_MouseEnter(object sender, MouseEventArgs e)

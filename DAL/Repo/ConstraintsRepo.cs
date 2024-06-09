@@ -20,7 +20,7 @@ namespace DAL.Repo
 
         public bool UpdateConstraint(Constraints constraint)
         {
-            _context.Constraints.Update(constraint);
+            _context.Update(constraint);
             _context.SaveChanges();
             return true;
         }

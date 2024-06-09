@@ -460,7 +460,7 @@
                     </Button.Template>
                 </Button>
                 <Grid Margin="95,30,0,0" Height="50" VerticalAlignment="Top">
-                    <TextBlock Text="Thêm sách mới" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
+                    <TextBlock Text="Sửa sách" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
                 </Grid>
                 <Grid Margin="95,120,95,120">
                     <Grid.RowDefinitions>

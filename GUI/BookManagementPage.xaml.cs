@@ -361,7 +361,7 @@ namespace GUI
             }
             else
             {
-                var filteredBooks = Books.Where(book => book.BookName == searchText.Text).ToList();
+                var filteredBooks = Books.Where(book => book.BookName.ToLower() == searchText.Text.ToLower()).ToList();
                 BooksListView.ItemsSource = filteredBooks;
 
             }

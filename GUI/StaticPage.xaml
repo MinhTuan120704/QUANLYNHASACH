@@ -32,7 +32,7 @@
                 Background="#FCDEDE"
                 HorizontalAlignment="Left"
                 Margin="64, 0, 0, 0"
-                VerticalAlignment="Center" >
+                VerticalAlignment="Center" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="homeButton_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}">
@@ -44,14 +44,13 @@
             </Button>
         </Border>
 
-        <Button
+        <Button x:Name="adminButton"
                 Grid.Column="2"
                 Grid.Row="0"
                 HorizontalAlignment="Right"
                 Background="#FCDEDE"
                 Margin="0, 0, 45, 0"
-                VerticalAlignment="Center"
-               >
+                VerticalAlignment="Center" Click="adminButton_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" >
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}">
@@ -118,7 +117,7 @@
           CornerRadius="50"
           Background="#FFEEEE"
           HorizontalAlignment="Left"
-          VerticalAlignment="Center" Margin="1174,0,0,0">
+          VerticalAlignment="Center" Margin="1174,0,0,0" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
             <TextBlock FontSize="30" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Tìm Kiếm</TextBlock>
         </Border>
 
@@ -128,8 +127,90 @@
           CornerRadius="50"
           Background="#6420AA"
           HorizontalAlignment="Center"
-          VerticalAlignment="Top" Margin="0,763,0,0" Grid.Row="1">
+          VerticalAlignment="Top" Margin="0,763,0,0" Grid.Row="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
             <TextBlock FontSize="30" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Xuất báo cáo</TextBlock>
+        </Border>
+        <Border x:Name="adminBorder"
+             Width="395"
+             Height="310"
+             Background="#FFEEEE"
+             CornerRadius="20"
+             HorizontalAlignment="Right"
+             Visibility="Hidden" Margin="0,0,20,650" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <materialDesign:PackIcon Kind="AccountCircleOutline" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="28,0,0,0"/>
+                    <Button 
+         Width="292" 
+         Content="Admin"
+         Height="50" 
+         FontSize="28"
+         HorizontalAlignment="Left" 
+         VerticalAlignment="Center"
+         Margin="83,0,0,0" 
+         BorderBrush="{x:Null}" 
+         Background="{x:Null}">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <materialDesign:PackIcon Kind="AccountSecure" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                    <Button x:Name="settingButton"
+         Width="292" 
+         Content="Cài đặt"
+         Height="40" 
+         HorizontalAlignment="Left" 
+         VerticalAlignment="Center"
+         Margin="95,0,0,0" 
+         BorderBrush="{x:Null}" 
+         Background="{x:Null}" Click="settingButton_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <materialDesign:PackIcon Kind="Logout" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                    <Button x:Name="logOutButton"
+         Width="292" 
+         Content="Đăng xuất"
+         Height="40" 
+         HorizontalAlignment="Left" 
+         VerticalAlignment="Center"
+         Margin="95,0,0,0" 
+         BorderBrush="{x:Null}" 
+         Background="{x:Null}" Click="logOutButton_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+
+            </Grid>
         </Border>
 
     </Grid>
