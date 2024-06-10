@@ -25,7 +25,5 @@ namespace DAL.Model
         public List<BookOrder> bookOrdersO { get; set; }
 
         public Consumer Consumer { get; set; }  
-
-        public Employee Employee { get; set; }
     }
 }

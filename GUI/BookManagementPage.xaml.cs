@@ -54,16 +54,19 @@ namespace GUI
         private void LoadBookTypes()
         {
             // Lấy tất cả các loại BookType từ danh sách Books và loại bỏ các phần tử trùng lặp
+            bookService = new BookService();
             BookTypes = new ObservableCollection<string>(bookService.GetBookTypes());
         }
         private void LoadAuthors()
         {
             // Lấy tất cả các loại BookType từ danh sách Books và loại bỏ các phần tử trùng lặp
+            bookService = new BookService();
             Authors = new ObservableCollection<string>(bookService.GetAuthors());
         }
         private void LoadPublishers()
         {
             // Lấy tất cả các loại BookType từ danh sách Books và loại bỏ các phần tử trùng lặp
+            bookService = new BookService();
             Publishers = new ObservableCollection<string>(bookService.GetPublishers());
         }
         private void LoadBooks()
@@ -101,7 +104,7 @@ namespace GUI
 
         private void filterButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            bookService = new BookService();
             LoadBookTypes();
             LoadAuthors();
             LoadPublishers();
@@ -226,7 +229,8 @@ namespace GUI
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            if((bookName.Text == "") || (bookType.Text == "") || (author.Text == "") || (publisher.Text == "") || (quantity.Text == "") || (unitPrice.Text == "") )
+            bookService = new BookService();
+            if ((bookName.Text == "") || (bookType.Text == "") || (author.Text == "") || (publisher.Text == "") || (quantity.Text == "") || (unitPrice.Text == "") )
             {
                 MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -268,7 +272,7 @@ namespace GUI
         }
         private void deleteBook_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
-
+            bookService = new BookService();
             if (BooksListView.SelectedItem is Book selectedBook)
             {
                 if(bookService.DeleteBook(selectedBook))
@@ -314,6 +318,7 @@ namespace GUI
 
         private void update_Click(object sender, RoutedEventArgs e)
         {
+            bookService = new BookService();
             if ((bookName_update.Text == "") || (bookType_update.Text == "") || (author_update.Text == "") || (publisher_update.Text == "") || (quantity_update.Text == "") || (unitPrice_update.Text == ""))
             {
                 MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -346,12 +351,7 @@ namespace GUI
                         MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         LoadBooks();
                         updateBookBorder.Visibility = Visibility.Hidden;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    
+                    } 
                 }
             }
         }
@@ -366,6 +366,7 @@ namespace GUI
         {
             if (searchText.Text == "")
             {
+                bookService = new BookService();
                 LoadBooks();
             }
             else

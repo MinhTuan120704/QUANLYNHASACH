@@ -20,9 +20,6 @@ namespace DAL.Configuration
             builder.Property(p => p.TotalValue).IsRequired();
             builder.Property(p => p.PaidValue).IsRequired();
             builder.Property(p => p.RemainingValue).IsRequired();
-
-            builder.HasOne(p => p.Consumer).WithMany(p => p.orders).HasForeignKey(p => p.ConsumerID);
-            builder.HasOne(p => p.Employee).WithMany(p => p.Employeeorders).HasForeignKey(p => p.EmployeeID);
         }
     }
 }

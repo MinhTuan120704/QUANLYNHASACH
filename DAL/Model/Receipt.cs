@@ -18,7 +18,5 @@ namespace DAL.Model
         public int Total {  get; set; }
 
         public List<ReceiptDetail> receiptDetailsR { get; set; }
-
-        public Employee Employee { get; set; }  
     }
 }

@@ -37,9 +37,6 @@ namespace DAL.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmployeeID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -50,9 +47,6 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AccountID");
-
-                    b.HasIndex("EmployeeID")
-                        .IsUnique();
 
                     b.ToTable("Account", (string)null);
                 });
@@ -174,37 +168,6 @@ namespace DAL.Migrations
                     b.ToTable("Consumer", (string)null);
                 });
 
-            modelBuilder.Entity("DAL.Model.Employee", b =>
-                {
-                    b.Property<int>("EmployeeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeID"));
-
-                    b.Property<DateTime>("BirthDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("EmployeeName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("EmployeeID");
-
-                    b.ToTable("Employee", (string)null);
-                });
-
             modelBuilder.Entity("DAL.Model.Order", b =>
                 {
                     b.Property<int>("OrderID")
@@ -219,9 +182,6 @@ namespace DAL.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmployeeID")
-                        .HasColumnType("int");
-
                     b.Property<int>("PaidValue")
                         .HasColumnType("int");
 
@@ -235,8 +195,6 @@ namespace DAL.Migrations
 
                     b.HasIndex("ConsumerID");
 
-                    b.HasIndex("EmployeeID");
-
                     b.ToTable("Order", (string)null);
                 });
 
@@ -248,9 +206,6 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReceiptID"));
 
-                    b.Property<int>("EmployeeID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("ReceiptDate")
                         .HasColumnType("datetime2");
 
@@ -258,8 +213,6 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ReceiptID");
-
-                    b.HasIndex("EmployeeID");
 
                     b.ToTable("Receipt", (string)null);
                 });
@@ -280,17 +233,6 @@ namespace DAL.Migrations
                     b.HasIndex("BookID");
 
                     b.ToTable("ReceiptDetail", (string)null);
-                });
-
-            modelBuilder.Entity("DAL.Model.Account", b =>
-                {
-                    b.HasOne("DAL.Model.Employee", "Employee")
-                        .WithOne("account")
-                        .HasForeignKey("DAL.Model.Account", "EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("DAL.Model.BookOrder", b =>
@@ -320,26 +262,7 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Model.Employee", "Employee")
-                        .WithMany("Employeeorders")
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Consumer");
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("DAL.Model.Receipt", b =>
-                {
-                    b.HasOne("DAL.Model.Employee", "Employee")
-                        .WithMany("Employeereceipt")
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("DAL.Model.ReceiptDetail", b =>
@@ -371,16 +294,6 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Model.Consumer", b =>
                 {
                     b.Navigation("orders");
-                });
-
-            modelBuilder.Entity("DAL.Model.Employee", b =>
-                {
-                    b.Navigation("Employeeorders");
-
-                    b.Navigation("Employeereceipt");
-
-                    b.Navigation("account")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("DAL.Model.Order", b =>
