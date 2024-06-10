@@ -71,7 +71,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Margin="0,10,0,0">
-            <ListView x:Name="BooksListView" BorderThickness="0" Background="Transparent" FontFamily="Verdana" FontSize="24" Foreground="Black">
+            <ListView x:Name="OrdersListView" BorderThickness="0" Background="Transparent" FontFamily="Verdana" FontSize="24" Foreground="Black">
                 <ListView.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="0,0,45,45"/>
@@ -84,12 +84,13 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn  Header="Book Name" DisplayMemberBinding="{Binding BookName}" />
-                        <GridViewColumn  Header="Book Type" DisplayMemberBinding="{Binding BookType}" />
-                        <GridViewColumn  Header="Author" DisplayMemberBinding="{Binding Author}" />
-                        <GridViewColumn  Header="Publisher" DisplayMemberBinding="{Binding Publisher}" />
-                        <GridViewColumn  Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
-                        <GridViewColumn  Header="Unit Price" DisplayMemberBinding="{Binding UnitPrice}" />
+                        <GridViewColumn  Header="Mã hóa đơn" DisplayMemberBinding="{Binding OrderID}" />
+                        <GridViewColumn  Header="Ngày hóa đơn" DisplayMemberBinding="{Binding Date}" />
+                        <GridViewColumn  Header="Mã khách hàng" DisplayMemberBinding="{Binding ConsumerID}" />
+                        <GridViewColumn  Header="Mã nhân viên" DisplayMemberBinding="{Binding EmployeeID}" />
+                        <GridViewColumn  Header="Tổng cộng" DisplayMemberBinding="{Binding TotalValue}" />
+                        <GridViewColumn  Header="Thanh toán" DisplayMemberBinding="{Binding PaidValue}" />
+                        <GridViewColumn  Header="Còn nợ" DisplayMemberBinding="{Binding RemainingValue}" />
                     </GridView>
                 </ListView.View>
             </ListView>

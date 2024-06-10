@@ -344,13 +344,14 @@ namespace GUI
                     if (bookService.UpdateBook(bookName_update.Text, bookType_update.Text, author_update.Text, publisher_update.Text, Quantity, UnitPrice))
                     {
                         MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadBooks();
+                        updateBookBorder.Visibility = Visibility.Hidden;
                     }
                     else
                     {
                         MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                    LoadBooks();
-                    updateBookBorder.Visibility = Visibility.Hidden;
+                    
                 }
             }
         }
