@@ -61,7 +61,7 @@
                     Margin="0,0,20,0" 
                     BorderBrush="{x:Null}" 
                     Background="{x:Null}" Click="filterButton_Click" MouseEnter="filterButton_MouseEnter" MouseLeave="filterButton_MouseLeave">
-                    <materialDesign:PackIcon Kind="Equaliser" Width="50" Height="50" />
+                    <materialDesign:PackIcon Kind="Reload" Width="50" Height="50" />
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}">
@@ -166,7 +166,7 @@
                 Height="700"
                 Background="#FEF7F7"
                 CornerRadius="20"
-                Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
+                Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
              <Grid>
                  <Button x:Name="closeButton"
                      Width="45" 
@@ -203,36 +203,40 @@
                                   VerticalContentAlignment="Center"
                                   FontSize="28"
                                   FontFamily="Verdana"
-                                  Width="450" 
+                                  Width="400" 
                                   Height="80"
-                                  Margin="10"/>
-                     </Grid>
+                                  Margin="0,10,60,10"/>
+                        <materialDesign:PackIcon x:Name="BookTypeReload" Kind="Reload" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="BookTypeReload_MouseLeftButtonUp"/>
+
+                    </Grid>
                     <Grid Grid.Row="1">
                         <TextBlock Text="Tác giả" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
                         <ComboBox x:Name="AuthorComboBox" 
                                   HorizontalAlignment="Right" 
-                                  VerticalAlignment="Center" 
+                                  VerticalAlignment="Center"
                                   VerticalContentAlignment="Center"
                                   FontSize="28"
                                   FontFamily="Verdana"
-                                  Width="450" 
+                                  Width="400" 
                                   Height="80"
-                                  Margin="10"/>
+                                  Margin="0,10,60,10"/>
+                        <materialDesign:PackIcon x:Name="AuthorReload" Kind="Reload" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="AuthorReload_MouseLeftButtonUp"/>
                     </Grid>
-                <Grid Grid.Row="2">
-                    <TextBlock Text="Nhà xuất bản" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="PublisherComboBox" 
-                                  HorizontalAlignment="Right" 
-                                  VerticalAlignment="Center" 
-                                  VerticalContentAlignment="Center"
-                                  FontSize="28"
-                                  FontFamily="Verdana"
-                                  Width="450" 
-                                  Height="80"
-                                  Margin="10"/>
-                </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBlock Text="Nhà xuất bản" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="PublisherComboBox" 
+                                      HorizontalAlignment="Right" 
+                                      VerticalAlignment="Center"
+                                      VerticalContentAlignment="Center"
+                                      FontSize="28"
+                                      FontFamily="Verdana"
+                                      Width="400" 
+                                      Height="80"
+                                      Margin="0,10,60,10"/>
+                        <materialDesign:PackIcon x:Name="PublisherReload" Kind="Reload" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="PublisherReload_MouseLeftButtonUp"/>
+                    </Grid>
 
-            </Grid>
+                </Grid>
                 <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
                     <Button x:Name="filter"
                     Width="144"
