@@ -11,10 +11,14 @@ namespace DAL.Model
     {
         public int ReceiptID { get; set; }
 
+        public int EmployeeID { get; set; }
+
         public DateTime ReceiptDate { get; set; }
 
         public int Total {  get; set; }
 
         public List<ReceiptDetail> receiptDetailsR { get; set; }
+
+        public Employee Employee { get; set; }  
     }
 }

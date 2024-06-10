@@ -10,6 +10,8 @@ namespace DAL.Model
     {
         public int AccountID { get; set; }
 
+        public int EmployeeID { get; set; }
+
         public string AccountName { get; set; }
 
         public string Password { get; set; }
@@ -18,13 +20,6 @@ namespace DAL.Model
 
         public DateTime Created {  get; set; }
 
-        public Account(int accountID, string accountName, string password, string position, DateTime created)
-        {
-            AccountID = accountID;
-            AccountName = accountName;
-            Password = password;
-            Position = position;
-            Created = created;
-        }
+        public Employee Employee { get; set; }
     }
 }

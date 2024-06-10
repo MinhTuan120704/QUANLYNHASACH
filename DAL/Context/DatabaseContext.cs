@@ -30,6 +30,7 @@ namespace DAL.Context
         public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<ReceiptDetail> ReceiptDetails { get; set; }
         public virtual DbSet<Constraints> Constraints { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,13 +42,14 @@ namespace DAL.Context
             modelBuilder.ApplyConfiguration(new ReceiptConfig());
             modelBuilder.ApplyConfiguration(new ReceiptDetailConfig());
             modelBuilder.ApplyConfiguration(new ConstraintsConfig());
+            modelBuilder.ApplyConfiguration(new EmployeeConfig());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=MSI\\SNNAS;Database=QuanLyNhaSach;Trusted_Connection=True;TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer("Server=MSI;Database=QuanLyNhaSach;Trusted_Connection=True;TrustServerCertificate=true");
             }
         }
     }

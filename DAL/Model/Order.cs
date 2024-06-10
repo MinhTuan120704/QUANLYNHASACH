@@ -12,6 +12,8 @@ namespace DAL.Model
 
         public int ConsumerID { get; set; }
 
+        public int EmployeeID { get; set; }
+
         public DateTime Date { get; set; }
 
         public int TotalValue { get; set; }
@@ -24,6 +26,6 @@ namespace DAL.Model
 
         public Consumer Consumer { get; set; }  
 
-
+        public Employee Employee { get; set; }
     }
 }

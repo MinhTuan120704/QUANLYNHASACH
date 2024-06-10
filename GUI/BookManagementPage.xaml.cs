@@ -105,12 +105,13 @@ namespace GUI
             LoadBookTypes();
             LoadAuthors();
             LoadPublishers();
+
             BookTypeComboBox.ItemsSource = BookTypes;
             AuthorComboBox.ItemsSource = Authors;
             PublisherComboBox.ItemsSource = Publishers;
-            BookTypeComboBox.SelectedIndex = -1;
-            AuthorComboBox.SelectedIndex = -1;
-            PublisherComboBox.SelectedIndex = -1;
+            BookTypeComboBox.SelectedIndex = PreviousSelectedFilter_BookType;
+            AuthorComboBox.SelectedIndex = PreviousSelectedFilter_Author;
+            PublisherComboBox.SelectedIndex = PreviousSelectedFilter_Publisher;
 
             filterBorder.Visibility = Visibility.Visible;
 
@@ -406,17 +407,20 @@ namespace GUI
 
         private void BookTypeReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PreviousSelectedFilter_BookType = -1;
+            BookTypeComboBox.SelectedIndex = PreviousSelectedFilter_BookType;
         }
 
         private void AuthorReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PreviousSelectedFilter_Author = -1;
+            AuthorComboBox.SelectedIndex = PreviousSelectedFilter_Author;
         }
 
         private void PublisherReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PreviousSelectedFilter_Publisher = -1;
+            PublisherComboBox.SelectedIndex = PreviousSelectedFilter_Publisher;
         }
     }
 }

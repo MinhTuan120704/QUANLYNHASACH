@@ -18,6 +18,8 @@ namespace DAL.Configuration
             builder.Property(p => p.ReceiptID).UseIdentityColumn(1, 1);
             builder.Property(p => p.ReceiptDate).IsRequired();
             builder.Property(p => p.Total).IsRequired();
+
+            builder.HasOne(p => p.Employee).WithMany(p => p.Employeereceipt).HasForeignKey(p => p.EmployeeID);
         }
     }
 }
