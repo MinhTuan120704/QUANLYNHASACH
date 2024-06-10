@@ -163,7 +163,7 @@ namespace BLL.Services
                 Publisher = publisher,
                 Quantity = quantity,
                 UnitPrice = unitPrice
-            }
+            };
             _bookRepo.UpdateBook(book);
             return true;
         }
