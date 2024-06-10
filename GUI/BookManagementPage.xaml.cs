@@ -71,6 +71,7 @@ namespace GUI
         }
         private void LoadBooks()
         {
+            bookService = new BookService();
             Books = new ObservableCollection<Book>(bookService.GetAllBook());
             BooksListView.ItemsSource = Books;
         }
@@ -260,13 +261,14 @@ namespace GUI
                     if (bookService.AddBook(bookName.Text, bookType.Text, author.Text, publisher.Text, Quantity, UnitPrice))
                     {
                         MessageBox.Show("Thêm sách thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadBooks();
+                        addBookBorder.Visibility = Visibility.Hidden;
                     }
                     else
                     {
                         MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                    LoadBooks();
-                    addBookBorder.Visibility = Visibility.Hidden;
+                    
                 }
             }
         }
@@ -275,11 +277,12 @@ namespace GUI
             bookService = new BookService();
             if (BooksListView.SelectedItem is Book selectedBook)
             {
-                if(bookService.DeleteBook(selectedBook))
-                {
+                bookService = new BookService();
+                bookService.DeleteBook(selectedBook);
+                
                     MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadBooks();
-                }
+                
                 
             }
             else
