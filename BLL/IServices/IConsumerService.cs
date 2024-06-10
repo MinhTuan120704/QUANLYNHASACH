@@ -13,5 +13,10 @@ namespace BLL.IServices
         bool DeleteConsumer(Consumer consumer);
         bool UpdateConsumer(Consumer consumer);
         List<Consumer> GetAllConsumer();
+        bool AddConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created);
+        bool UpdateConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created);
+        bool CheckConsumerExistFromDB(Consumer consumer);
+        int GetConsumerIDFromDB(string phone);
+        List<Consumer> SearchConsumerFromDB(string consumername);
     }
 }

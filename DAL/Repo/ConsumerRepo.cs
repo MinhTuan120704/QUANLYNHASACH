@@ -1,6 +1,7 @@
 ﻿using DAL.Context;
 using DAL.IRepo;
 using DAL.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace DAL.Repo
 
         public List<Consumer> GetAllFromDB()
         {
-            return _context.Consumers.ToList();
+            return _context.Consumers.AsNoTracking().ToList();
         }
 
         public bool UpdateConsumer(Consumer consumer)
@@ -41,5 +42,21 @@ namespace DAL.Repo
             _context.SaveChanges();
             return true;
         }
+
+        public bool CheckConsumerExistFromDB(Consumer consumer)
+        {
+            return _context.Consumers.Any(p => p.ConsumerName.ToLower() == consumer.ConsumerName.ToLower() && consumer.Phone == p.Phone);
+        }
+
+        public int GetConsumerIDFromDB(string phone)
+        {
+            return _context.Consumers.Where(p => p.Phone == phone).Select(p => p.ConsumerID).FirstOrDefault();
+        }
+
+        public List<Consumer> SearchConsumerFromDB(string consumername)
+        {
+            return _context.Consumers.Where(p => p.ConsumerName.ToLower() == consumername.ToLower()).ToList();
+        }
+
     }
 }
