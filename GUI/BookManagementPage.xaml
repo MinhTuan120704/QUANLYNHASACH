@@ -149,12 +149,12 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn  Header="Book Name" DisplayMemberBinding="{Binding BookName}" />
-                        <GridViewColumn  Header="Book Type" DisplayMemberBinding="{Binding BookType}" />
-                        <GridViewColumn  Header="Author" DisplayMemberBinding="{Binding Author}" />
-                        <GridViewColumn  Header="Publisher" DisplayMemberBinding="{Binding Publisher}" />
-                        <GridViewColumn  Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
-                        <GridViewColumn  Header="Unit Price" DisplayMemberBinding="{Binding UnitPrice}" />
+                        <GridViewColumn  Header="Tên sách" DisplayMemberBinding="{Binding BookName}" />
+                        <GridViewColumn  Header="Thể loại" DisplayMemberBinding="{Binding BookType}" />
+                        <GridViewColumn  Header="Tác giả" DisplayMemberBinding="{Binding Author}" />
+                        <GridViewColumn  Header="Nhà xuất bản" DisplayMemberBinding="{Binding Publisher}" />
+                        <GridViewColumn  Header="Số lượng" DisplayMemberBinding="{Binding Quantity}" />
+                        <GridViewColumn  Header="Giá nhập" DisplayMemberBinding="{Binding UnitPrice}" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -166,7 +166,7 @@
                 Height="700"
                 Background="#FEF7F7"
                 CornerRadius="20"
-                Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
+                Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
              <Grid>
                  <Button x:Name="closeButton"
                      Width="45" 

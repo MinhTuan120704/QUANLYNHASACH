@@ -109,12 +109,13 @@ namespace GUI
             LoadBookTypes();
             LoadAuthors();
             LoadPublishers();
+
             BookTypeComboBox.ItemsSource = BookTypes;
             AuthorComboBox.ItemsSource = Authors;
             PublisherComboBox.ItemsSource = Publishers;
-            BookTypeComboBox.SelectedIndex = -1;
-            AuthorComboBox.SelectedIndex = -1;
-            PublisherComboBox.SelectedIndex = -1;
+            BookTypeComboBox.SelectedIndex = PreviousSelectedFilter_BookType;
+            AuthorComboBox.SelectedIndex = PreviousSelectedFilter_Author;
+            PublisherComboBox.SelectedIndex = PreviousSelectedFilter_Publisher;
 
             filterBorder.Visibility = Visibility.Visible;
 
@@ -273,7 +274,7 @@ namespace GUI
         }
         private void deleteBook_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
-
+            bookService = new BookService();
             if (BooksListView.SelectedItem is Book selectedBook)
             {
                 bookService = new BookService();
@@ -353,12 +354,7 @@ namespace GUI
                         MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         LoadBooks();
                         updateBookBorder.Visibility = Visibility.Hidden;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    
+                    } 
                 }
             }
         }
@@ -416,17 +412,20 @@ namespace GUI
 
         private void BookTypeReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PreviousSelectedFilter_BookType = -1;
+            BookTypeComboBox.SelectedIndex = PreviousSelectedFilter_BookType;
         }
 
         private void AuthorReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PreviousSelectedFilter_Author = -1;
+            AuthorComboBox.SelectedIndex = PreviousSelectedFilter_Author;
         }
 
         private void PublisherReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PreviousSelectedFilter_Publisher = -1;
+            PublisherComboBox.SelectedIndex = PreviousSelectedFilter_Publisher;
         }
     }
 }

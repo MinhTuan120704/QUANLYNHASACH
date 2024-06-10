@@ -36,6 +36,7 @@ namespace BLL.Services
         {
             Book book = new Book()
             {
+                BookID = _bookRepo.GetBookIDFromDB(bookName,author),
                 BookName = bookName,
                 BookType = bookType,
                 Author = author,
@@ -162,11 +163,9 @@ namespace BLL.Services
                 Publisher = publisher,
                 Quantity = quantity,
                 UnitPrice = unitPrice
-            };
-           
+            }
             _bookRepo.UpdateBook(book);
             return true;
-            
         }
     }
 }

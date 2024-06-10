@@ -19,7 +19,7 @@ namespace DAL.Configuration
             builder.Property(p => p.AccountID).UseIdentityColumn(1, 1);
             builder.Property(p => p.AccountName).IsRequired();
             builder.Property(p => p.Password).HasMaxLength(32).IsRequired();
-            builder.Property(p => p.Position).IsRequired();   
+            builder.Property(p => p.Position).IsRequired(); 
         }
     }
 }
