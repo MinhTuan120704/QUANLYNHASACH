@@ -1,5 +1,6 @@
 ﻿using BLL.Services;
 using DAL.Model;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,7 @@ namespace GUI
 
         private void LoadOrders()
         {
+            orderService = new OrderService();
             Orders = new ObservableCollection<Order>(orderService.GetAllOrder());
             OrdersListView.ItemsSource = Orders;
         }
@@ -81,6 +83,18 @@ namespace GUI
         {
             LoginPage newPage = new LoginPage();
             this.NavigationService.Navigate(newPage);
+        }
+
+        private void CTHD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ThemHD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            AddBill addBill = new AddBill();
+
+            addBill.ShowDialog();
         }
     }
 }

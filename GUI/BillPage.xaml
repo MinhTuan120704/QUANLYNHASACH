@@ -87,7 +87,6 @@
                         <GridViewColumn  Header="Mã hóa đơn" DisplayMemberBinding="{Binding OrderID}" />
                         <GridViewColumn  Header="Ngày hóa đơn" DisplayMemberBinding="{Binding Date}" />
                         <GridViewColumn  Header="Mã khách hàng" DisplayMemberBinding="{Binding ConsumerID}" />
-                        <GridViewColumn  Header="Mã nhân viên" DisplayMemberBinding="{Binding EmployeeID}" />
                         <GridViewColumn  Header="Tổng cộng" DisplayMemberBinding="{Binding TotalValue}" />
                         <GridViewColumn  Header="Thanh toán" DisplayMemberBinding="{Binding PaidValue}" />
                         <GridViewColumn  Header="Còn nợ" DisplayMemberBinding="{Binding RemainingValue}" />
@@ -101,7 +100,7 @@
                 <ColumnDefinition Width="186*"/>
                 <ColumnDefinition Width="23*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Margin="14,10,6,24" TextAlignment="Center" FontSize="28" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+            <TextBlock Margin="14,10,6,24" TextAlignment="Center" FontSize="28" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="ThemHD_MouseLeftButtonUp">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -149,7 +148,7 @@
           CornerRadius="50"
           Background="#6420AA"
           HorizontalAlignment="Center"
-          VerticalAlignment="Top" Margin="0,736,0,0" Grid.Row="1" Grid.Column="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+          VerticalAlignment="Top" Margin="0,736,0,0" Grid.Row="1" Grid.Column="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="CTHD_MouseLeftButtonUp">
             <TextBlock FontSize="28" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Xuất hóa đơn</TextBlock>
         </Border>
 
