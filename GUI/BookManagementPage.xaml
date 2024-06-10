@@ -166,7 +166,7 @@
                 Height="700"
                 Background="#FEF7F7"
                 CornerRadius="20"
-                Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
+                Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
              <Grid>
                  <Button x:Name="closeButton"
                      Width="45" 
