@@ -403,5 +403,20 @@ namespace GUI
             BooksListView.ItemsSource = bookService.FilterBook(selectedBookType, selectedAuthor, selectedPublisher);
             
         }
+
+        private void BookTypeReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void AuthorReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void PublisherReload_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
