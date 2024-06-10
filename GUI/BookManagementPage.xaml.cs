@@ -45,42 +45,42 @@ namespace GUI
         public ObservableCollection<string> BookTypes { get; set; }
         public ObservableCollection<string> Publishers { get; set; }
         public ObservableCollection<string> Authors { get; set; }
-     
+        private static BookService bookService;
+        private static bool isAdminBorderVisible;
+        private static int PreviousSelectedFilter_BookType = -1;
+        private static int PreviousSelectedFilter_Author = -1;
+        private static int PreviousSelectedFilter_Publisher = -1;
+
         private void LoadBookTypes()
         {
             // Lấy tất cả các loại BookType từ danh sách Books và loại bỏ các phần tử trùng lặp
-            var bookTypes = Books.Select(book => book.BookType).Distinct().ToList();
-            BookTypes = new ObservableCollection<string>(bookTypes);
+            BookTypes = new ObservableCollection<string>(bookService.GetBookTypes());
         }
         private void LoadAuthors()
         {
             // Lấy tất cả các loại BookType từ danh sách Books và loại bỏ các phần tử trùng lặp
-            var authors = Books.Select(book => book.Author).Distinct().ToList();
-            Authors = new ObservableCollection<string>(authors);
+            Authors = new ObservableCollection<string>(bookService.GetAuthors());
         }
         private void LoadPublishers()
         {
             // Lấy tất cả các loại BookType từ danh sách Books và loại bỏ các phần tử trùng lặp
-            var publishers = Books.Select(book => book.Publisher).Distinct().ToList();
-            Publishers = new ObservableCollection<string>(publishers);
+            Publishers = new ObservableCollection<string>(bookService.GetPublishers());
         }
         private void LoadBooks()
         {
-            BookService bookService = new BookService();
             Books = new ObservableCollection<Book>(bookService.GetAllBook());
             BooksListView.ItemsSource = Books;
         }
-
 
         public BookManagementPage()
         {
             InitializeComponent();
-            BookService bookService = new BookService();
-            Books = new ObservableCollection<Book>(bookService.GetAllBook());
-            BooksListView.ItemsSource = Books;
-          
+            bookService = new BookService();
+            isAdminBorderVisible = false;
+            LoadBooks();
         }
-        private bool isAdminBorderVisible = false;
+
+        
         private void home_MouseEnter(object sender, MouseEventArgs e)
         {
             home.Cursor = Cursors.Hand;
@@ -101,15 +101,16 @@ namespace GUI
 
         private void filterButton_Click(object sender, RoutedEventArgs e)
         {
-            BookTypeComboBox.SelectedIndex = -1;
-            AuthorComboBox.SelectedIndex = -1;
-            PublisherComboBox.SelectedIndex = -1;
+            
             LoadBookTypes();
             LoadAuthors();
             LoadPublishers();
             BookTypeComboBox.ItemsSource = BookTypes;
             AuthorComboBox.ItemsSource = Authors;
             PublisherComboBox.ItemsSource = Publishers;
+            BookTypeComboBox.SelectedIndex = -1;
+            AuthorComboBox.SelectedIndex = -1;
+            PublisherComboBox.SelectedIndex = -1;
 
             filterBorder.Visibility = Visibility.Visible;
 
@@ -226,75 +227,59 @@ namespace GUI
         {
             if((bookName.Text == "") || (bookType.Text == "") || (author.Text == "") || (publisher.Text == "") || (quantity.Text == "") || (unitPrice.Text == "") )
             {
-                MessageBox.Show("Không được để trống.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                string BookName = bookName.Text;
-                string BookType = bookType.Text;
-                string Author = author.Text;
-                string Publisher = publisher.Text;
                 int Quantity;
                 int UnitPrice;
-                bool check_quantity = int.TryParse(quantity.Text, out Quantity);
-                bool check_unitprice = int.TryParse(unitPrice.Text, out UnitPrice);
-                if (check_quantity == false)
+                if (int.TryParse(quantity.Text, out Quantity) == false && int.TryParse(unitPrice.Text, out UnitPrice) == false)
                 {
                     quantity.Text = "";
-                    MessageBox.Show("Không được nhập sai kiểu dữ liệu.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    unitPrice.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (check_unitprice == false)
+                else if (int.TryParse(unitPrice.Text, out UnitPrice) == false)
                 {
                     unitPrice.Text = "";
-                    MessageBox.Show("Không được nhập sai kiểu dữ liệu.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (check_quantity && check_unitprice)
+                else if (int.TryParse(quantity.Text, out Quantity) == false)
                 {
-                    // Tạo đối tượng Book mới
-                    Book newBook = new Book()
+                    quantity.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                if (int.TryParse(quantity.Text, out Quantity) && int.TryParse(unitPrice.Text, out UnitPrice))
+                {
+                    if (bookService.AddBook(bookName.Text, bookType.Text, author.Text, publisher.Text, Quantity, UnitPrice))
                     {
-                        BookName = BookName,
-                        BookType = BookType,
-                        Author = Author,
-                        Publisher = Publisher,
-                        Quantity = Quantity,
-                        UnitPrice = UnitPrice
-                    };
-                    BookService bookService = new BookService();
-                    Books = new ObservableCollection<Book>(bookService.GetAllBook());
-                    bool isDuplicate = Books.Any(book => book.BookName == newBook.BookName && book.BookType == newBook.BookType && book.Author == newBook.Author && book.Publisher == newBook.Publisher);
-                    if (!isDuplicate)
-                    {
-                        bookService.AddBook(newBook);
+                        MessageBox.Show("Thêm sách thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Sách đã tồn tại.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                        MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                     LoadBooks();
                     addBookBorder.Visibility = Visibility.Hidden;
-
                 }
-
-
             }
-
         }
         private void deleteBook_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
 
-
             if (BooksListView.SelectedItem is Book selectedBook)
             {
-                BookService bookService = new BookService();
-                var result = bookService.DeleteBook(selectedBook);
-                LoadBooks();
+                if(bookService.DeleteBook(selectedBook))
+                {
+                    MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadBooks();
+                }
+                
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một cuốn sách để xóa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn một cuốn sách để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -317,7 +302,7 @@ namespace GUI
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một cuốn sách để sửa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn một cuốn sách để sửa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -328,28 +313,50 @@ namespace GUI
 
         private void update_Click(object sender, RoutedEventArgs e)
         {
-            Book updateBook = new Book();
-            BookService bookService = new BookService();
-            Books = new ObservableCollection<Book>(bookService.GetAllBook());
-            updateBook.BookID = Books.Where(book => book.BookName == bookName_update.Text && book.Author == author_update.Text).Select(book => book.BookID).FirstOrDefault();
-            updateBook.BookName = bookName_update.Text;
-            updateBook.BookType = bookType_update.Text;
-            updateBook.Author = author_update.Text;
-            updateBook.Publisher = publisher_update.Text;
-            updateBook.Quantity = int.Parse(quantity_update.Text);
-            updateBook.UnitPrice = int.Parse(unitPrice_update.Text);
+            if ((bookName_update.Text == "") || (bookType_update.Text == "") || (author_update.Text == "") || (publisher_update.Text == "") || (quantity_update.Text == "") || (unitPrice_update.Text == ""))
+            {
+                MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                int Quantity;
+                int UnitPrice;
+                if (int.TryParse(quantity_update.Text, out Quantity) == false && int.TryParse(unitPrice_update.Text, out UnitPrice) == false)
+                {
+                    quantity_update.Text = "";
+                    unitPrice_update.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (int.TryParse(unitPrice_update.Text, out UnitPrice) == false)
+                {
+                    unitPrice_update.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if(int.TryParse(quantity_update.Text, out Quantity) == false)
+                {
+                    quantity_update.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
 
-            bookService.UpdateBook(updateBook);
-            LoadBooks();
-
-            updateBookBorder.Visibility= Visibility.Hidden;
-
+                if (int.TryParse(quantity_update.Text, out Quantity) && int.TryParse(unitPrice_update.Text, out UnitPrice))
+                {
+                    if (bookService.UpdateBook(bookName_update.Text, bookType_update.Text, author_update.Text, publisher_update.Text, Quantity, UnitPrice))
+                    {
+                        MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    LoadBooks();
+                    updateBookBorder.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
         private void searchText_DragEnter(object sender, DragEventArgs e)
         {
-            var filteredBooks = Books.Where(book => book.BookName == searchText.Text).ToList();
-            BooksListView.ItemsSource = filteredBooks;
+            BooksListView.ItemsSource = bookService.SearchBook(searchText.Text);
         }
 
 
@@ -357,130 +364,44 @@ namespace GUI
         {
             if (searchText.Text == "")
             {
-                BooksListView.ItemsSource = Books;
+                LoadBooks();
             }
             else
             {
-                var filteredBooks = Books.Where(book => book.BookName.ToLower() == searchText.Text.ToLower()).ToList();
-                BooksListView.ItemsSource = filteredBooks;
-
+                BooksListView.ItemsSource = bookService.SearchBook(searchText.Text);
             }
         }
 
         private void filter_Click(object sender, RoutedEventArgs e)
         {
             filterBorder.Visibility = Visibility.Collapsed;
+
+            PreviousSelectedFilter_BookType = BookTypeComboBox.SelectedIndex;
+            PreviousSelectedFilter_Author = AuthorComboBox.SelectedIndex;
+            PreviousSelectedFilter_Publisher = PublisherComboBox.SelectedIndex;
+
             string? selectedBookType = BookTypeComboBox.SelectedItem as string;
             string? selectedAuthor = AuthorComboBox.SelectedItem as string;
             string? selectedPublisher = PublisherComboBox.SelectedItem as string;
-            if (selectedBookType != null && selectedAuthor != null && selectedPublisher != null)
-            {
-                var filteredBooks = Books.Where(book => book.BookType == selectedBookType && book.Author == selectedAuthor && book.Publisher == selectedPublisher).ToList();
-                BooksListView.ItemsSource = filteredBooks;
 
-            }
-            else
-            {
-
-                if (selectedBookType == null && selectedAuthor != null && selectedPublisher != null)
-                {
-                    var filteredBooks = Books.Where(book => book.Author == selectedAuthor && book.Publisher == selectedPublisher).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType != null && selectedAuthor == null && selectedPublisher != null)
-                {
-                    var filteredBooks = Books.Where(book => book.BookType == selectedBookType && book.Publisher == selectedPublisher).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType != null && selectedAuthor != null && selectedPublisher == null)
-                {
-                    var filteredBooks = Books.Where(book => book.BookType == selectedBookType && book.Author == selectedAuthor).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType != null && selectedAuthor == null && selectedPublisher == null)
-                {
-                    var filteredBooks = Books.Where(book => book.BookType == selectedBookType).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType == null && selectedAuthor != null && selectedPublisher == null)
-                {
-                    var filteredBooks = Books.Where(book => book.Author == selectedAuthor).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType == null && selectedAuthor == null && selectedPublisher != null)
-                {
-                    var filteredBooks = Books.Where(book => book.Publisher == selectedPublisher).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType == null && selectedAuthor == null && selectedPublisher == null)
-                {
-                    BooksListView.ItemsSource = Books;
-                }
-            }
+            BooksListView.ItemsSource = bookService.FilterBook(selectedBookType,selectedAuthor,selectedPublisher);
+            
         }
 
         private void filter_DragEnter(object sender, DragEventArgs e)
         {
             filterBorder.Visibility = Visibility.Collapsed;
-            string? selectedBookType = BookTypeComboBox.SelectedItem as string;
+
+            PreviousSelectedFilter_BookType = BookTypeComboBox.SelectedIndex;
+            PreviousSelectedFilter_Author = AuthorComboBox.SelectedIndex;
+            PreviousSelectedFilter_Publisher = PublisherComboBox.SelectedIndex;
+
+            string? selectedBookType = BookTypeComboBox.SelectedItem as string; 
             string? selectedAuthor = AuthorComboBox.SelectedItem as string;
             string? selectedPublisher = PublisherComboBox.SelectedItem as string;
-            if (selectedBookType != null && selectedAuthor != null && selectedPublisher != null)
-            {
-                var filteredBooks = Books.Where(book => book.BookType == selectedBookType && book.Author == selectedAuthor && book.Publisher == selectedPublisher).ToList();
-                BooksListView.ItemsSource = filteredBooks;
 
-            }
-            else
-            {
-
-                if (selectedBookType == null && selectedAuthor != null && selectedPublisher != null)
-                {
-                    var filteredBooks = Books.Where(book => book.Author == selectedAuthor && book.Publisher == selectedPublisher).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType != null && selectedAuthor == null && selectedPublisher != null)
-                {
-                    var filteredBooks = Books.Where(book => book.BookType == selectedBookType && book.Publisher == selectedPublisher).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType != null && selectedAuthor != null && selectedPublisher == null)
-                {
-                    var filteredBooks = Books.Where(book => book.BookType == selectedBookType && book.Author == selectedAuthor).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType != null && selectedAuthor == null && selectedPublisher == null)
-                {
-                    var filteredBooks = Books.Where(book => book.BookType == selectedBookType).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType == null && selectedAuthor != null && selectedPublisher == null)
-                {
-                    var filteredBooks = Books.Where(book => book.Author == selectedAuthor).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType == null && selectedAuthor == null && selectedPublisher != null)
-                {
-                    var filteredBooks = Books.Where(book => book.Publisher == selectedPublisher).ToList();
-                    BooksListView.ItemsSource = filteredBooks;
-                }
-
-                if (selectedBookType == null && selectedAuthor == null && selectedPublisher == null)
-                {
-                    BooksListView.ItemsSource = Books;
-                }
-            }
+            BooksListView.ItemsSource = bookService.FilterBook(selectedBookType, selectedAuthor, selectedPublisher);
+            
         }
     }
 }
