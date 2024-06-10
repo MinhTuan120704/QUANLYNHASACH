@@ -17,14 +17,5 @@ namespace DAL.Model
         public string Position { get; set; }
 
         public DateTime Created {  get; set; }
-
-        public Account(int accountID, string accountName, string password, string position, DateTime created)
-        {
-            AccountID = accountID;
-            AccountName = accountName;
-            Password = password;
-            Position = position;
-            Created = created;
-        }
     }
 }

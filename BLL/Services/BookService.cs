@@ -36,6 +36,7 @@ namespace BLL.Services
         {
             Book book = new Book()
             {
+                BookID = _bookRepo.GetBookIDFromDB(bookName,author),
                 BookName = bookName,
                 BookType = bookType,
                 Author = author,
@@ -61,6 +62,7 @@ namespace BLL.Services
 
         public bool DeleteBook(Book book)
         {
+            book.BookID = _bookRepo.GetBookIDFromDB(book.BookName, book.Author);
             _bookRepo.DeleteBook(book);
             return true;
         }
@@ -154,6 +156,7 @@ namespace BLL.Services
         {
             Book book = new Book()
             {
+                BookID = _bookRepo.GetBookIDFromDB(bookName, author),
                 BookName = bookName,
                 BookType = bookType,
                 Author = author,
@@ -161,15 +164,8 @@ namespace BLL.Services
                 Quantity = quantity,
                 UnitPrice = unitPrice
             };
-            if (CheckBookExist(book))
-            {
-                return false;
-            }
-            else
-            {
-                _bookRepo.UpdateBook(book);
-                return true;
-            }
+            _bookRepo.UpdateBook(book);
+            return true;
         }
     }
 }

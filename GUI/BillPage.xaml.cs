@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BLL.Services;
+using DAL.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,20 @@ namespace GUI
     /// </summary>
     public partial class BillPage : Page
     {
+        public ObservableCollection<Order> Orders { get; set; }
+
+        private static OrderService orderService;
+
+        private void LoadOrders()
+        {
+            Orders = new ObservableCollection<Order>(orderService.GetAllOrder());
+            OrdersListView.ItemsSource = Orders;
+        }
         public BillPage()
         {
             InitializeComponent();
+            orderService = new OrderService();
+            LoadOrders();
         }
         private void event_MouseEnter(object sender, MouseEventArgs e)
         {
