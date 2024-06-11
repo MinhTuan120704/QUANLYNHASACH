@@ -5,6 +5,7 @@ using DAL.Repo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,13 +21,44 @@ namespace BLL.Services
         }
         public bool AddConsumer(Consumer consumer)
         {
-            _consumerRepo.AddConsumer(consumer);
-            return true;
+            if (CheckConsumerExistFromDB(consumer))
+            {
+                return false;
+            }
+            else
+            {
+                _consumerRepo.AddConsumer(consumer);
+                return true;
+            }
+        }
+
+        public bool AddConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created)
+        {
+            Consumer consumer = new Consumer()
+            {
+                ConsumerID = _consumerRepo.GetConsumerIDFromDB(phone),
+                ConsumerName = consumerName,
+                Address = address,
+                Phone = phone,
+                Email = email,
+                Debt = debt,
+                Created = created
+            };
+            if (CheckConsumerExistFromDB(consumer))
+            {
+                return false;
+            }
+            else
+            {
+                _consumerRepo.AddConsumer(consumer);
+                return true;
+            }
         }
 
         public bool DeleteConsumer(Consumer consumer)
         {
-            _consumerRepo.DeleteConsumer(consumer); 
+            consumer.ConsumerID = _consumerRepo.GetConsumerIDFromDB(consumer.Phone);
+            _consumerRepo.DeleteConsumer(consumer);
             return true;
         }
 
@@ -39,6 +71,35 @@ namespace BLL.Services
         {
             _consumerRepo.UpdateConsumer(consumer); 
             return true;
+        }
+        public bool UpdateConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created)
+        {
+            Consumer consumer = new Consumer()
+            {
+                ConsumerID = _consumerRepo.GetConsumerIDFromDB(phone),
+                ConsumerName = consumerName,
+                Address = address,
+                Phone = phone,
+                Email = email,
+                Debt = debt,
+                Created = created
+            };
+            _consumerRepo.UpdateConsumer(consumer);
+            return true;
+        }
+        public bool CheckConsumerExistFromDB(Consumer consumer)
+        {
+            return _consumerRepo.CheckConsumerExistFromDB(consumer);
+
+        }
+        public int GetConsumerIDFromDB(string phone)
+        {
+            return _consumerRepo.GetConsumerIDFromDB(phone);
+
+        }
+        public List<Consumer> SearchConsumerFromDB(string consumername)
+        {
+            return _consumerRepo.SearchConsumerFromDB(consumername);
         }
     }
 }

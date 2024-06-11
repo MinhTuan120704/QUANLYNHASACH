@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace GUI
 {
@@ -33,10 +34,21 @@ namespace GUI
         public CustomerPage()
         {
             InitializeComponent();
-            
+            LoadConsumers();
 
         }
+        private static ConsumerService consumerService;
+        public ObservableCollection<Consumer> Consumers { get; set; }
+
         private bool isAdminBorderVisible = false;
+
+        private void LoadConsumers()
+        {
+            consumerService = new ConsumerService();
+            Consumers = new ObservableCollection<Consumer>(consumerService.GetAllConsumer());
+            CustomersListView.ItemsSource = Consumers;
+        }
+
         private void home_MouseEnter(object sender, MouseEventArgs e)
         {
             home.Cursor = Cursors.Hand;
@@ -54,44 +66,6 @@ namespace GUI
 
             this.NavigationService.Navigate(newPage);
         }
-
-        private void filterButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-            filterBorder.Visibility = Visibility.Visible;
-
-        }
-
-        private void filterButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Hand;
-        }
-
-        private void filterButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Arrow;
-        }
-
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            filterBorder.Visibility = Visibility.Collapsed;
-
-        }
-
-        private void closeButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            closeButton.Cursor = Cursors.Hand;
-        }
-
-
-
-        private void closeButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            closeButton.Cursor = Cursors.Arrow;
-        }
-
-
 
         private void logOutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -151,7 +125,12 @@ namespace GUI
 
         private void addCustomer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
+            customerName.Text = ""; 
+            address.Text = ""; 
+            phone.Text = ""; 
+            email.Text = ""; 
+            debt.Text = ""; 
+            created.Text = "";
             addCustomerBorder.Visibility = Visibility.Visible;
         }
         private void event_MouseEnter(object sender, MouseEventArgs e)
@@ -167,15 +146,67 @@ namespace GUI
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            addCustomerBorder.Visibility = Visibility.Hidden;
+            consumerService = new ConsumerService();
+            if ((customerName.Text == "") || (address.Text == "") || (phone.Text == "") || (email.Text == "") || (debt.Text == "") || (created.Text == ""))
+            {
+                MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                int Debt;
+                DateTime Created;
+                if (int.TryParse(debt.Text, out Debt) == false && DateTime.TryParse(created.Text, out Created) == false)
+                {
+                    debt.Text = "";
+                    created.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (int.TryParse(debt.Text, out Debt) == false)
+                {
+                    debt.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (DateTime.TryParse(created.Text, out Created) == false)
+                {
+                    created.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                if (DateTime.TryParse(created.Text, out Created) && int.TryParse(debt.Text, out Debt))
+                {
+                    if (consumerService.AddConsumer(customerName.Text, address.Text, phone.Text, email.Text, Debt, Created))
+                    {
+                        MessageBox.Show("Thêm khách hàng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadConsumers();
+                        addCustomerBorder.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Khách hàng đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+
+                }
+            }
 
 
         }
         private void deleteCustomer_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
+            consumerService = new ConsumerService();
+            if (CustomersListView.SelectedItem is Consumer selectedConsumer)
+            {
+                consumerService = new ConsumerService();
+                consumerService.DeleteConsumer(selectedConsumer);
+
+                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadConsumers();
 
 
-            
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một khách hàng để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void closeBorder_addCustomer(object sender, RoutedEventArgs e)
@@ -184,9 +215,22 @@ namespace GUI
         }
 
         private void updateCustomer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            updateCustomerBorder.Visibility = Visibility.Visible;
-
+        {          
+            consumerService = new ConsumerService();
+            if (CustomersListView.SelectedItem is Consumer selectedConsumer)
+            {
+                updateCustomerBorder.Visibility = Visibility.Visible;
+                customerName_update.Text = selectedConsumer.ConsumerName;
+                address_update.Text = selectedConsumer.Address;
+                phone_update.Text = selectedConsumer.Phone;
+                email_update.Text = selectedConsumer.Email;
+                debt_update.Text = selectedConsumer.Debt.ToString();
+                created_update.Text = selectedConsumer.Created.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một khách hàng để sửa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -196,9 +240,46 @@ namespace GUI
 
         private void update_Click(object sender, RoutedEventArgs e)
         {
-            
+            consumerService = new ConsumerService();
+            if ((customerName_update.Text == "") || (address_update.Text == "") || (phone_update.Text == "") || (email_update.Text == "") || (debt_update.Text == "") || (created_update.Text ==""))
+            {
+                MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                int Debt;
+                DateTime Created;
+                if (int.TryParse(debt_update.Text, out Debt) == false && DateTime.TryParse(created_update.Text, out Created) == false)
+                {
+                    debt_update.Text = "";
+                    created_update.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (int.TryParse(debt_update.Text, out Debt) == false)
+                {
+                    debt_update.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (DateTime.TryParse(created_update.Text, out Created) == false)
+                {
+                    created_update.Text = "";
+                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
 
-            updateCustomerBorder.Visibility = Visibility.Hidden;
+                if (DateTime.TryParse(created_update.Text, out Created) && int.TryParse(debt_update.Text, out Debt))
+                {
+                    if (consumerService.UpdateConsumer(customerName_update.Text, address_update.Text, phone_update.Text, email_update.Text, Debt, Created))
+                    {
+                        MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadConsumers();
+
+                        updateCustomerBorder.Visibility = Visibility.Hidden;
+                    }
+                    
+                }
+            }
+
+
 
         }
 
@@ -210,19 +291,16 @@ namespace GUI
 
         private void PackIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
+            if (searchText.Text == "")
+            {
+                consumerService = new ConsumerService();
+                LoadConsumers();
+            }
+            else
+            {
+                CustomersListView.ItemsSource = consumerService.SearchConsumerFromDB(searchText.Text);
+            }
         }
 
-        private void filter_Click(object sender, RoutedEventArgs e)
-        {
-            filterBorder.Visibility = Visibility.Collapsed;
-            
-        }
-
-        private void filter_DragEnter(object sender, DragEventArgs e)
-        {
-            filterBorder.Visibility = Visibility.Collapsed;
-            
-        }
     }
 }
