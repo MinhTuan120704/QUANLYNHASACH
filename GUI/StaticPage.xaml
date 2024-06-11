@@ -153,13 +153,13 @@
             <TextBlock FontSize="30" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Tìm Kiếm</TextBlock>
         </Border>
 
-        <Border
+        <Border x:Name="reportPDF"
           Height="80"
           Width="222"
           CornerRadius="50"
           Background="#6420AA"
           HorizontalAlignment="Center"
-          VerticalAlignment="Top" Margin="0,763,0,0" Grid.Row="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+          VerticalAlignment="Top" Margin="0,763,0,0" Grid.Row="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="reportPDF_MouseLeftButtonUp">
             <TextBlock FontSize="30" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Xuất báo cáo</TextBlock>
         </Border>
         <Border x:Name="adminBorder"

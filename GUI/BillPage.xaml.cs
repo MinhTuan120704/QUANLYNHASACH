@@ -3,9 +3,12 @@ using BLL.Services;
 using DAL.Model;
 using MaterialDesignThemes.Wpf;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -42,7 +45,7 @@ namespace GUI
         private static ConstraintsService constraintsService;
 
         private static double OrderAmount = 0;
-
+        
         private void LoadOrders()
         {
             orderService = new OrderService();
@@ -501,6 +504,123 @@ namespace GUI
             {
                 MessageBox.Show("Vui lòng chọn hóa đơn để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void XHD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            BookOrderShow firstOrder = (BookOrderShow)dataGridDetailsBookOrder.Items[0];
+
+            string debt = (int.Parse(OrderAmountTextBookOrder.Text.Replace(" đ", "")) - int.Parse(TextPaidBookOrder.Text.Replace(" đ", ""))).ToString();
+            PdfDocument document = new PdfDocument();
+
+            // Thêm một trang mới vào tài liệu
+            PdfPage page = document.AddPage();
+
+            // Lấy đối tượng vẽ cho trang
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+
+            // Vẽ một văn bản đơn giản lên trang
+            XFont font = new XFont("Times New Roman", 36);
+            gfx.DrawString("Chi tiết hóa đơn", font, XBrushes.Black,
+                new XRect(0, 50, page.Width, page.Height),
+                XStringFormats.TopCenter);
+
+            XFont font1 = new XFont("Times New Roman", 14, XFontStyleEx.Italic);
+            gfx.DrawString("(Ngày xuất: " + DateTime.Now.ToString(("dd/MM/yyyy"))+ ")", font1, XBrushes.Black,
+                new XRect(0, 100, page.Width, page.Height),
+                XStringFormats.TopCenter);
+
+            XFont font2 = new XFont("Times New Roman", 14);
+            gfx.DrawString("Mã hóa đơn: " + firstOrder.OrderID.ToString(), font2, XBrushes.Black,
+                new XRect(50, 150, page.Width, page.Height),
+                XStringFormats.TopLeft);
+            gfx.DrawString("Tên khách hàng: " + TextNameBookOrder.Text, font2, XBrushes.Black,
+                new XRect(50, 180, page.Width, page.Height),
+                XStringFormats.TopLeft);
+            gfx.DrawString("SĐT: " + TextPhoneBookOrder.Text, font2, XBrushes.Black,
+                new XRect(50, 210, page.Width, page.Height),
+                XStringFormats.TopLeft);
+
+            XFont font3 = new XFont("Times New Roman", 11);
+
+
+            double startX = 20;
+            double startY = 250;
+            double cellWidth = 140;
+            double cellHeight = 30;
+            int numRows = dataGridDetailsBookOrder.Items.Count + 1;
+            int numCols = 4;
+            for (int col = 0; col < numCols; col++)
+            {
+                double x = startX + col * cellWidth;
+                double y = startY;
+                gfx.DrawRectangle(XPens.Black, x, y, cellWidth, cellHeight);
+                string text;
+                switch (col)
+                {
+                    case 0:
+                        text = "Mã sách";
+                        break;
+                    case 1:
+                        text = "Tên sách";
+                        break;
+                    case 2:
+                        text = "Số lượng";
+                        break;
+                    default:
+                        text = "Thành tiền";
+                        break;
+                }
+                gfx.DrawString(text, font3, XBrushes.Black, new XRect(x, y, cellWidth, cellHeight), XStringFormats.Center);
+            }
+            // Vẽ các ô của bảng
+            for (int row = 1; row < numRows; row++)
+            {
+                for (int col = 0; col < numCols; col++)
+                {
+                    BookOrderShow order = (BookOrderShow)dataGridDetailsBookOrder.Items[row - 1];
+                    string text;
+
+                    double x = startX + col * cellWidth;
+                    double y = startY + row * cellHeight;
+                    switch (col)
+                    {
+                        case 0:
+                            text = order.BookID.ToString();
+                            break;
+                        case 1:
+                            text = order.BookName.ToString();
+                            break;
+                        case 2:
+                            text = order.Quantity.ToString();
+                            break;
+                        default:
+                            text = order.Total.ToString();
+                            break;
+                    }
+                    gfx.DrawRectangle(XPens.Black, x, y, cellWidth, cellHeight);
+
+                    // Vẽ văn bản trong ô (dùng làm ví dụ)
+                    gfx.DrawString(text, font3, XBrushes.Black, new XRect(x, y, cellWidth, cellHeight), XStringFormats.Center);
+                }
+            }
+            gfx.DrawString("Thành tiền: " + OrderAmountTextBookOrder.Text, font2, XBrushes.Black,
+                new XRect(50, startY + 5 * cellHeight, page.Width, page.Height),
+                XStringFormats.TopLeft);
+            gfx.DrawString("Thanh toán: " + TextPaidBookOrder.Text, font2, XBrushes.Black,
+                new XRect(50, startY + 5 * cellHeight+30, page.Width, page.Height),
+                XStringFormats.TopLeft);
+            gfx.DrawString("Số nợ: " + debt +" đ", font2, XBrushes.Black,
+                new XRect(50, startY + 5 * cellHeight + 60, page.Width, page.Height),
+                XStringFormats.TopLeft);
+            //Lưu tài liệu PDF vào đĩa
+            document.Save("Chung1.pdf");
+
+
+
+            // Đóng tài liệu
+            document.Close();
+            Process.Start(new ProcessStartInfo("Chung1.pdf") { UseShellExecute = true });
         }
     }
 }
