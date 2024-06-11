@@ -52,7 +52,7 @@
             Background="#FEF7F7" HorizontalAlignment="Left">
             <Grid>
                 <materialDesign:PackIcon Kind="Search" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="52,0,0,0" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="PackIcon_MouseLeftButtonUp" />
-                
+
                 <TextBox x:Name="searchText" Height="96" Width="700" BorderThickness="0" HorizontalAlignment="Right" Margin="0,0,80,0"  DragEnter="searchText_DragEnter" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" Background="{x:Null}"/>
 
 
@@ -83,6 +83,7 @@
                 <RowDefinition Height="100" />
                 <RowDefinition Height="100" />
                 <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="addCustomer"
@@ -108,7 +109,17 @@
                     FontWeight="Bold" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"  MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave" MouseLeftButtonUp="updateCustomer_MouseLeftButtonUp"/>
+
+            <TextBlock x:Name="DebtCustomer"
+                        Grid.Row="4"
+                        Text="Phiếu thu tiền" 
+                        FontFamily="Verdana" 
+                        FontSize="28" 
+                        FontWeight="Bold" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" MouseLeftButtonUp="DebtCustomer_MouseLeftButtonUp" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave"/>
         </Grid>
+        
 
         <Border Grid.Column="1"
         Grid.Row="1"
@@ -262,7 +273,7 @@
                         Height="64"
                         BorderThickness="0"
                         Background="#290F75"   
-                        IsDefault="True" Margin="700,0,0,0" Click="add_Click" DragEnter="add_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">        
+                        IsDefault="True" Margin="700,0,0,0" Click="add_Click" DragEnter="add_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}">
@@ -457,6 +468,162 @@
                         MouseEnter="event_MouseEnter" 
                         MouseLeave="event_MouseLeave" 
                         MouseLeftButtonUp="Button_Click" />
+                </Grid>
+
+            </Grid>
+        </Border>
+        <Border x:Name="addDebtBorder"
+ Grid.RowSpan="2"
+ Width="890"
+ Height="900"
+ Background="#FEF7F7"
+ CornerRadius="20"
+ Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="351,75,0,0">
+            <Grid>
+                <Button 
+        Width="45" 
+        Height="45" 
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Margin="0, 12, 12, 0"   
+        BorderBrush="{x:Null}" 
+        Background="{x:Null}" Click="closeBorder_debt" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" >
+                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Grid Margin="95,30,0,0" Height="50" VerticalAlignment="Top">
+                    <TextBlock Text="Phiếu thu tiền" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
+                </Grid>
+                <Grid Margin="95,120,95,120">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Tên" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="debtName"
+            BorderThickness="0" 
+            FontSize="28" 
+            FontFamily="Verdana" 
+            Margin="200,15,0,15" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center" 
+            Background="#F3F0F0" />
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock Text="Địa chỉ" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="debtaddress"
+            BorderThickness="0" 
+            FontSize="28" 
+            FontFamily="Verdana" 
+            Margin="200,15,0,15" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center" 
+            Background="#F3F0F0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <TextBlock Text="SĐT" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="debtphone"
+            BorderThickness="0" 
+            FontSize="28" 
+            FontFamily="Verdana" 
+            Margin="200,15,0,15" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center" 
+            Background="#F3F0F0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <TextBlock Text="Email" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="debtemail"
+            BorderThickness="0" 
+            FontSize="28" 
+            FontFamily="Verdana" 
+            Margin="200,15,0,15" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center" 
+            Background="#F3F0F0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="41*"/>
+                            <ColumnDefinition Width="29*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Số tiền thu" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="debt_debt"
+            BorderThickness="0" 
+            FontSize="28" 
+            FontFamily="Verdana" 
+            Margin="200,15,0,15" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center" 
+            Background="#F3F0F0" Grid.ColumnSpan="2"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+                        <TextBlock Text="Ngày thu tiền" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center" IsEnabled="False"/>
+                        <TextBox x:Name="debtcreated"
+            BorderThickness="0" 
+            FontSize="28" 
+            FontFamily="Verdana" 
+            Margin="200,15,0,15" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center" 
+            Background="#F3F0F0"/>
+                    </Grid>
+                </Grid>
+                <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                    <Button x:Name="debt_add"
+            Width="144"
+            Height="64"
+            BorderThickness="0"
+            Background="#290F75"   
+            IsDefault="True" Margin="700,0,0,0" Click="debt_Click" DragEnter="debt_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <Grid>
+                            <TextBlock Foreground="#FEF7F7"
+        Text="Tạo"
+        FontSize="28" 
+        FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </Button>
+                    <TextBlock x:Name="debt_cancel" 
+Foreground="#290F75"
+Text="Hủy" 
+Width="80"
+FontSize="28" 
+FontFamily="Verdana" 
+Margin="460,0,0,0" 
+TextAlignment="Center"   
+VerticalAlignment="Center" 
+MouseEnter="event_MouseEnter" 
+MouseLeave="event_MouseLeave" 
+MouseLeftButtonUp="closeBorder_debt" />
                 </Grid>
 
             </Grid>

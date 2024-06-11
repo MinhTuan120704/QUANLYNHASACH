@@ -30,7 +30,9 @@ namespace GUI
 
     public partial class CustomerPage : Page
     {
+        private static ConstraintsService ConstraintsService;
 
+        private static int G_Debt;
         public CustomerPage()
         {
             InitializeComponent();
@@ -302,5 +304,56 @@ namespace GUI
             }
         }
 
+        private void DebtCustomer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+            if(CustomersListView.SelectedItem is Consumer consumer)
+            {
+                consumerService = new ConsumerService();
+                debtName.Text = consumer.ConsumerName;
+                debtaddress.Text = consumer.Address;
+                debtemail.Text = consumer.Email;
+                debtphone.Text = consumer.Phone;
+                debtcreated.Text = DateTime.Now.ToString();
+                G_Debt = consumer.Debt;
+                addDebtBorder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Chọn một khách hàng để thu tiền", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void closeBorder_debt(object sender, RoutedEventArgs e)
+        {
+            addDebtBorder.Visibility = Visibility.Hidden;
+        }
+
+        private void debt_Click(object sender, RoutedEventArgs e)
+        {
+            ConstraintsService = new ConstraintsService();
+            int money;
+            if(int.TryParse(debt_debt.Text, out money) == false)
+            {
+                MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                debt_debt.Text = "";
+            }
+            else if(debt_debt.Text == "")
+            {
+                MessageBox.Show("Vui lòng không để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if(ConstraintsService.GetConstraintValue("QĐ5") == "1" && money > G_Debt)
+            {
+                MessageBox.Show("Số tiền thu không vượt quá số tiền khách hàng đang nợ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                debt_debt.Text = "";
+            }
+            else
+            {
+                consumerService.UpdateConsumer(debtName.Text, debtaddress.Text, debtphone.Text, debtemail.Text, G_Debt-money, DateTime.Parse(debtcreated.Text));
+                MessageBox.Show("Thu tiền thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadConsumers();
+                addDebtBorder.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
