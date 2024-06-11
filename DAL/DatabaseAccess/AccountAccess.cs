@@ -15,6 +15,7 @@ namespace DAL.DatabaseAccess
         {
             using (DatabaseContext dbContext = new DatabaseContext())
             {
+
                 var user = from account in dbContext.Accounts
                            where account.AccountName == username && account.Password == password
                            select account;

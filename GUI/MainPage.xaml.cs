@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL.IServices;
+using BLL.Services;
+using DAL.Context;
+using DAL.Model;using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +21,17 @@ namespace GUI
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
+
     public partial class MainPage : Page
     {
+        private static AccountService accountService;
+        string position;
+
         public MainPage()
         {
             InitializeComponent();
+            accountService = new AccountService();
+            position = accountService.GetAccountPosition(GlobalVariables.UserText);
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -34,10 +43,19 @@ namespace GUI
 
         private void bookManagementButton_Click(object sender, RoutedEventArgs e)
         {
-            BookManagementPage newPage = new BookManagementPage();
+            if (position == "NhanVien")
+            {
+                MessageBox.Show("Không có quyền truy cập", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            }
+            else
+            {
+
+                BookManagementPage newPage = new BookManagementPage();
 
 
-            this.NavigationService.Navigate(newPage);
+                this.NavigationService.Navigate(newPage);
+            }
         }
 
         private void bookManagementButton_MouseEnter(object sender, MouseEventArgs e)
@@ -98,8 +116,15 @@ namespace GUI
 
         private void settingButton_Click(object sender, RoutedEventArgs e)
         {
-            SettingPage newPage = new SettingPage();
-            this.NavigationService.Navigate(newPage);
+            if (position == "NhanVien")
+            {
+                MessageBox.Show("Không có quyền truy cập", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            } 
+            else { 
+                SettingPage newPage = new SettingPage();
+                this.NavigationService.Navigate(newPage);
+            }
         }
 
         private void settingButton_MouseEnter(object sender, MouseEventArgs e)
@@ -118,8 +143,18 @@ namespace GUI
 
         private void statisticButton_Click(object sender, RoutedEventArgs e)
         {
-            StaticPage newPage = new StaticPage();
-            this.NavigationService.Navigate(newPage);
+
+            if (position == "NhanVien")
+            {
+                MessageBox.Show("Không có quyền truy cập", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            }
+            else
+            {
+                StaticPage newPage = new StaticPage();
+                this.NavigationService.Navigate(newPage);
+
+            }
         }
 
         private void statisticButton_MouseEnter(object sender, MouseEventArgs e)

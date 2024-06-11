@@ -13,5 +13,12 @@ namespace BLL.IServices
         bool UpdateAccount(Account account);
         bool DeleteAccount(Account account);
         List<Account> GetAllAccount();
+        string GetAccountPosition(string name);
+        bool GetExistAccount(Account account);
+
+        int GetAccountID(string name);
+
+        bool UpdateAccount(string accountName, string password, string position, DateTime created);
+
     }
 }

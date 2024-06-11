@@ -24,5 +24,19 @@ namespace DAL.Repo
             _context.SaveChanges();
             return true;
         }
+
+        public string GetConstraintValue(string name)
+        {
+            return _context.Constraints.Where(p => p.ConstraintName.ToLower() == name.ToLower()).Select(p => p.ConstraintValue).FirstOrDefault();
+
+        }
+
+        public int GetConstraintID(string name)
+        {
+            return _context.Constraints.Where(p => p.ConstraintName.ToLower() == name.ToLower()).Select(p => p.ConstraintID).FirstOrDefault();
+
+        }
+
+
     }
 }
