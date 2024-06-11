@@ -167,7 +167,7 @@
              Background="#FFEEEE"
              CornerRadius="20"
              HorizontalAlignment="Right"
-             Visibility="Hidden" Margin="0,0,20,650" Grid.Row="1" Grid.ColumnSpan="2"> 
+             Visibility="Hidden" Margin="0,0,20,650" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -240,6 +240,225 @@
                     </Button>
                 </Grid>
 
+
+            </Grid>
+        </Border>
+
+        <Border x:Name="addOrderBorder"
+     Grid.ColumnSpan="3"
+     Grid.RowSpan="2"
+     Width="1303"
+     Height="700"
+     Background="#FFDEDBDB"
+     CornerRadius="20"
+     Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <TextBlock Margin="50,10,859,643" TextAlignment="Left" FontSize="28" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" >
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>Thêm hóa đơn mới
+                </TextBlock>
+                <TextBlock Margin="76,84,1013,572" TextAlignment="Left" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>Tên Khách Hàng:
+                </TextBlock>
+                <TextBox x:Name="TextName" Margin="295,74,530,582" FontSize="28"></TextBox>
+                <DataGrid AutoGenerateColumns="False" Name="dataGridDetails" Margin="76,193,76,193" Width="1303" Height="700" Background="#FFFFFF">
+                    <DataGrid.RowHeaderStyle>
+                        <Style TargetType="DataGridRowHeader">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGrid.RowHeaderStyle>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã sách"  Binding="{Binding BookCode}" Width="*" />
+                        <DataGridTextColumn Header="Tên sách" Binding="{Binding BookName}" Width="*"/>
+                        <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="*"/>
+                        <DataGridTextColumn Header="Giá tiền" Binding="{Binding UnitPrice}" Width="*"/>
+                        <DataGridTextColumn Header="Thành tiền" Binding="{Binding Amount}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Margin="76,547,1013,115" TextAlignment="Center" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5"  MouseEnter="event_MouseEnter" 
+MouseLeave="event_MouseLeave">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>Thêm sách
+                </TextBlock>
+                <TextBlock Margin="290,547,783,0" TextAlignment="Center" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.476,-0.143" Height="42" VerticalAlignment="Top" MouseEnter="event_MouseEnter" 
+MouseLeave="event_MouseLeave">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>Xóa sách
+                </TextBlock>
+                <Button 
+                        Width="45" 
+                        Height="45" 
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0, 12, 12, 0"   
+                        BorderBrush="{x:Null}" 
+                        Background="{x:Null}" Click="closeBorder_addOrder" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" >
+                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="128*"/>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="1125*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="add"
+                            Width="144"
+                            Height="64"
+                            BorderThickness="0"
+                            Background="#290F75"   
+                            IsDefault="True" Margin="926,18,55,18" Click="add_Click" DragEnter="add_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Grid.Column="2">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <Grid>
+                            <TextBlock Foreground="#FEF7F7"
+            Text="Thêm"
+            FontSize="28" 
+            FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </Button>
+                    <TextBlock x:Name="cancel" 
+                                Foreground="#290F75"
+                                Text="Hủy" 
+                                Width="80"
+                                FontSize="28" 
+                                FontFamily="Verdana" 
+                                Margin="796,0,249,0" 
+                                TextAlignment="Center"   
+                                VerticalAlignment="Center" 
+                                MouseEnter="event_MouseEnter" 
+                                MouseLeave="event_MouseLeave" 
+                                MouseLeftButtonUp="closeBorder_addOrder" Grid.Column="2" />
+                </Grid>
+                <Grid Margin="10,10,1133,904" Grid.Column="0" RenderTransformOrigin="0.414,0.526">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="186*"/>
+                        <ColumnDefinition Width="23*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="2,10,19,10" TextAlignment="Center" FontSize="28" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>Thêm hóa đơn
+                    </TextBlock>
+                </Grid>
+                <Grid Margin="49,103,1153,826" Grid.Column="0" RenderTransformOrigin="0.414,0.526">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="186*"/>
+                        <ColumnDefinition Width="23*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="2,10,19,10" TextAlignment="Center" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>Tên Khách Hàng:
+                    </TextBlock>
+                </Grid>
+
+                <Grid Margin="10,901,1193,28" Grid.Column="0" RenderTransformOrigin="0.414,0.526">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="186*"/>
+                        <ColumnDefinition Width="23*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="2,10,10,2" TextAlignment="Center" FontSize="26" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>Tổng tiền:
+                    </TextBlock>
+                </Grid>
+                <Grid Margin="40,810,1163,119" Grid.Column="0" RenderTransformOrigin="0.414,0.526">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="186*"/>
+                        <ColumnDefinition Width="23*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="2,10,19,10" TextAlignment="Center" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>Thêm sách
+                    </TextBlock>
+                </Grid>
+
+                <Grid Margin="316,810,887,119" Grid.Column="0" RenderTransformOrigin="0.414,0.526">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="186*"/>
+                        <ColumnDefinition Width="23*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="2,10,19,10" TextAlignment="Center" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>Xóa sách
+                    </TextBlock>
+                </Grid>
+                <TextBlock Margin="830,84,405,594" TextAlignment="Left" FontSize="20" FontWeight="ExtraBlack" FontStyle="Italic" FontFamily="Verdana" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform><Run Text="SĐT:"/></TextBlock>
+                <TextBox x:Name="PhoneText" Margin="903,74,128,582" FontSize="28"/>
 
             </Grid>
         </Border>

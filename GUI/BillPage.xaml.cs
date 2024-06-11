@@ -1,4 +1,5 @@
-﻿using BLL.Services;
+﻿using BLL.IServices;
+using BLL.Services;
 using DAL.Model;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -25,14 +26,22 @@ namespace GUI
     public partial class BillPage : Page
     {
         public ObservableCollection<Order> Orders { get; set; }
+        public ObservableCollection<Book> Books { get; set; }
 
         private static OrderService orderService;
+
+        private static BookService bookService;
 
         private void LoadOrders()
         {
             orderService = new OrderService();
             Orders = new ObservableCollection<Order>(orderService.GetAllOrder());
             OrdersListView.ItemsSource = Orders;
+        }
+        private void LoadBooks()
+        {
+            bookService = new BookService();
+            Books = new ObservableCollection<Book>(bookService.GetAllBook());
         }
         public BillPage()
         {
@@ -92,9 +101,19 @@ namespace GUI
 
         private void ThemHD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            AddBill addBill = new AddBill();
+            addOrderBorder.Visibility = Visibility.Visible;
+        }
 
-            addBill.ShowDialog();
+        private void closeBorder_addOrder(object sender, RoutedEventArgs e)
+        {
+            TextName.Text = "";
+            PhoneText.Text = "";
+            addOrderBorder.Visibility = Visibility.Hidden;
+        }
+
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
