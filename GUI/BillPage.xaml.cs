@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,8 @@ namespace GUI
         private static ConsumerService consumerService;
 
         private static BookOrderService bookOrderService;
+
+        private static ConstraintsService constraintsService;
 
         private static double OrderAmount = 0;
 
@@ -116,6 +119,7 @@ namespace GUI
             bookService = new BookService();
             if(OrdersListView.SelectedItem is Order order)
             {
+                BookOrderBorder.Visibility = Visibility.Visible;
                 TextNameBookOrder.Text = consumerService.GetConsumerNameByID(order.ConsumerID);
                 TextPhoneBookOrder.Text =consumerService.GetConsumerPhoneByID(order.ConsumerID);
                 TextPaidBookOrder.Text = order.PaidValue.ToString() + " đ";
@@ -128,18 +132,12 @@ namespace GUI
                     Book? book = bookService.GetBookByID(idItem.BookID);
                     BookOrderShow cTHD = new BookOrderShow(order.OrderID,idItem.BookID,book.BookName,idItem.Quantity,idItem.Quantity*book.UnitPrice*105/100);
                     dataGridDetailsBookOrder.Items.Add(cTHD);
-                }
-                
-                
+                }     
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một hóa đơn để thêm", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Vui lòng chọn một hóa đơn để xem", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-
-            BookOrderBorder.Visibility = Visibility.Visible;
-
         }
 
         private void ThemHD_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -148,6 +146,7 @@ namespace GUI
             TextPhone.Text = "";
             TextName.Text = "";
             TextPaid.Text = "";
+            OrderAmountText.Text = OrderAmount.ToString() + " đ";
             addOrderBorder.Visibility = Visibility.Visible;
         }
 
@@ -161,51 +160,70 @@ namespace GUI
         private void add_Click(object sender, RoutedEventArgs e)
         {
             bool update = false;
+            bool check_Constraint = true;
             bookService = new BookService();
-            if(bookQuantity.Text == "" || !int.TryParse(bookQuantity.Text, out int quantity))
+            constraintsService = new ConstraintsService();
+            int quantity;
+            if (bookQuantity.Text == "" || !int.TryParse(bookQuantity.Text, out quantity))
             {
                 MessageBox.Show("Vui lòng nhập số lượng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 bookQuantity.Text = "";
             }
-            else if(dataGridBook.SelectedItem is Book selectedBook)
+            else if (dataGridBook.SelectedItem is Book selectedBook)
             {
                 Book? book = bookService.GetBookByID(selectedBook.BookID);
 
-                for(int i = 0; i < dataGridDetails.Items.Count; i++)
+                if (quantity + int.Parse(constraintsService.GetConstraintValue("QĐ4")) > book.Quantity)
                 {
-                    BookSell booksell = (BookSell)dataGridDetails.Items[i];
-                    if (book.BookID == booksell.BookID && book != null && booksell != null)
+                    string message = "Số lượng tồn không được ít hơn " + constraintsService.GetConstraintValue("QĐ4") + ". Vui lòng nhập lại số lượng";
+                    MessageBox.Show(message, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    check_Constraint = false;
+                }
+                else
+                {
+                    for (int i = 0; i < dataGridDetails.Items.Count; i++)
                     {
-                        if (int.Parse(bookQuantity.Text) != booksell.Quantity)
+                        BookSell booksell = (BookSell)dataGridDetails.Items[i];
+                        if (book.BookID == booksell.BookID && book != null && booksell != null)
                         {
-                            dataGridDetails.Items.Remove(booksell);
-                            OrderAmount -= booksell.Amount;
-                            booksell.Quantity = int.Parse(bookQuantity.Text);
-                            booksell.Amount = (double)booksell.Quantity * booksell.UnitPrice;
-                            dataGridDetails.Items.Add(booksell);
-                            OrderAmount += booksell.Amount;
-                            update = true;
-                            OrderAmountText.Text = OrderAmount.ToString() + " đ";
-                            MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                            addBookBorder.Visibility = Visibility.Hidden;
-                        }
-                        if(int.Parse(bookQuantity.Text) == booksell.Quantity && !update)
-                        {
-                            MessageBox.Show("Sách đã được thêm", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (int.Parse(bookQuantity.Text) != booksell.Quantity)
+                            {
+                                book.Quantity += booksell.Quantity;
+                                dataGridDetails.Items.Remove(booksell);
+                                OrderAmount -= booksell.Amount;
+                                booksell.Quantity = int.Parse(bookQuantity.Text);
+                                booksell.Amount = (double)booksell.Quantity * booksell.UnitPrice;
+                                dataGridDetails.Items.Add(booksell);
+                                OrderAmount += booksell.Amount;
+                                book.Quantity -= booksell.Quantity;
+                                bookService.UpdateBook(book);
+                                update = true;
+                                OrderAmountText.Text = OrderAmount.ToString() + " đ";
+                                MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                                addBookBorder.Visibility = Visibility.Hidden;
+                            }
+                            if (int.Parse(bookQuantity.Text) == booksell.Quantity && !update)
+                            {
+                                MessageBox.Show("Sách đã được thêm", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
                         }
                     }
                 }
 
-                if(!update)
+                
+
+                if (!update && check_Constraint)
                 {
                     BookSell bookSell = new BookSell(selectedBook.BookID, selectedBook.BookName, int.Parse(bookQuantity.Text), selectedBook.UnitPrice);
                     dataGridDetails.Items.Add(bookSell);
                     OrderAmount += bookSell.Amount;
                     OrderAmountText.Text = OrderAmount.ToString() + " đ";
+                    book.Quantity -= bookSell.Quantity;
+                    bookService.UpdateBook(book);
                     MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     addBookBorder.Visibility = Visibility.Hidden;
                 }
-                
+
             }
             else
             {
@@ -252,6 +270,8 @@ namespace GUI
 
         private void XoaSach_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            bookService = new BookService();
+
             if (dataGridDetails.SelectedItem is BookSell selectedBook)
             {
                 BookSell bookSell = selectedBook;
@@ -264,8 +284,13 @@ namespace GUI
                         OrderAmount -= booksell.Amount;
                         dataGridDetails.Items.Remove(booksell);
                         OrderAmountText.Text = OrderAmount.ToString() + " đ";
+
+                        Book? book = bookService.GetBookByID(bookSell.BookID);
+                        book.Quantity += booksell.Quantity;
+                        bookService.UpdateBook(book);
                     }
                 }
+                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -279,16 +304,38 @@ namespace GUI
             orderService = new OrderService();
             consumerService = new ConsumerService();
             bookOrderService = new BookOrderService();
-            if(TextName.Text == "" || TextPhone.Text == "" || TextPaid.Text == "")
+            constraintsService = new ConstraintsService();
+            if (TextName.Text == "" || TextPhone.Text == "" || TextPaid.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập thông tin khách hàng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                check = false;
+            }
+            else if (consumerService.GetDebtByPhone(TextPhone.Text) > int.Parse(constraintsService.GetConstraintValue("QĐ3")))
+            {
+                MessageBox.Show("Khách hàng vượt quá số nợ cho phép", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                check = false;
+            }
+            else if (consumerService.GetConsumerIDFromDB(TextPhone.Text) == 0)
+            {
+                MessageBox.Show("Khách hàng không tồn tại. Vui lòng tạo khách hàng mới", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                check = false;
+            }
+            else if (int.Parse(TextPaid.Text) > OrderAmount )
+            {
+                MessageBox.Show("Số tiền thanh toán không được lớn hơn tổng tiền của hóa đơn", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                TextPaid.Text = "";
+                check = false;
+            }
+            else if (dataGridDetails.Items.Count == 0)
+            {
+                MessageBox.Show("Vui lòng thêm ít nhất một loại sách", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 check = false;
             }
             else
             {
                 string Phone = TextPhone.Text;
                 string Paid = TextPaid.Text;
-                for(int i = 0; i < Phone.Length; i++) 
+                for (int i = 0; i < Phone.Length; i++)
                 {
                     if (Phone[i] < '0' && Phone[i] > '9')
                     {
@@ -323,16 +370,22 @@ namespace GUI
                 {
                     BookSell? bookSell = (BookSell)dataGridDetails.Items[i];
                     BookOrder bookOrder = new BookOrder();  
-                    bookOrder.OrderID = orderService.GetOrderID(order.ConsumerID,order.Date);
+                    bookOrder.OrderID = orderService.GetOrderID(order.ConsumerID,order.Date);,
                     bookOrder.BookID = bookSell.BookID;
                     bookOrder.Quantity = bookSell.Quantity;
                     bookOrderService.AddBookOrder(bookOrder);
+
+                    Consumer? consumer = consumerService.GetConsumerByID(order.ConsumerID);
+                    consumer.Debt += order.RemainingValue;
+                    consumerService.UpdateConsumer(consumer);
                 }
 
                 
                 MessageBox.Show("Thêm hóa đơn thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 addOrderBorder.Visibility = Visibility.Hidden;
                 LoadOrders();
+                OrderAmount = 0;
+                dataGridDetails.Items.Clear();
             }
         }
 
@@ -426,12 +479,23 @@ namespace GUI
         private void XoaHoaDon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             orderService = new OrderService();
+            bookOrderService = new BookOrderService();
 
             if (OrdersListView.SelectedItem is Order order)
             {
-                orderService.DeleteOrder(order);
-                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadOrders();
+
+                if(MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    orderService.DeleteOrder(order);
+                    List<BookOrder> list = bookOrderService.GetBookOrderbyOrderID(order.OrderID);
+
+                    foreach(BookOrder bookOrder in list) 
+                    {
+                        bookOrderService.DeleteBookOrder(bookOrder);
+                    }
+                    MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadOrders();
+                }
             }
             else
             {

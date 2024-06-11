@@ -19,6 +19,8 @@ namespace BLL.IServices
         bool UpdateConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created);
         bool CheckConsumerExistFromDB(Consumer consumer);
         int GetConsumerIDFromDB(string phone);
+        int GetDebtByPhone(string phone);
+        Consumer? GetConsumerByID(int consumerID);
         List<Consumer> SearchConsumerFromDB(string consumername);
     }
 }

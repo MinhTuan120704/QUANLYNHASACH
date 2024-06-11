@@ -67,5 +67,15 @@ namespace DAL.Repo
         {
             return _context.Consumers.Where(c => c.ConsumerID == consumerID).Select(c => c.Phone).FirstOrDefault();
         }
+
+        public int GetDebtByPhoneFromDB(string phone)
+        {
+            return _context.Consumers.Where(p => p.Phone == phone).Select(c => c.Debt).FirstOrDefault();
+        }
+
+        public Consumer? GetConsumerByIDFromDB(int consumerID)
+        {
+            return _context.Consumers.Where(p => p.ConsumerID == consumerID).FirstOrDefault();
+        }
     }
 }
