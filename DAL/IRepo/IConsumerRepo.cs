@@ -14,6 +14,8 @@ namespace DAL.IRepo
         bool UpdateConsumer(Consumer consumer);
         bool CheckConsumerExistFromDB(Consumer consumer);
         int GetConsumerIDFromDB(string phone);
+        string GetConsumerNameByIDFromDB(int consumerID);
+        string GetConsumerPhoneByIDFromDB(int consumerID);
         List<Consumer> SearchConsumerFromDB(string consumername);
         List<Consumer> GetAllFromDB();
     }

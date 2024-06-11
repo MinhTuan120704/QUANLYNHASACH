@@ -11,7 +11,8 @@ namespace BLL.IServices
     {
         bool AddOrder(Order order);
         bool DeleteOrder(Order order);
-        bool UpdateOrder(Order order);
+        bool UpdateOrder(Order order);  
+        bool UpdateOrder(int orderID, DateTime date, int consumerID, int total, int paid, int remaining);  
         List<Order> GetAllOrder();
     }
 }

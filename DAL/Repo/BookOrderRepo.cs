@@ -35,6 +35,11 @@ namespace DAL.Repo
             return _context.BookOrders.ToList();
         }
 
+        public List<BookOrder> GetBookOrderByOrderIDFromDB(int orderID)
+        {
+            return _context.BookOrders.Where(b => b.OrderID == orderID).ToList();
+        }
+
         public bool UpdateBookOrder(BookOrder bookorder)
         {
             _context.BookOrders.Update(bookorder);

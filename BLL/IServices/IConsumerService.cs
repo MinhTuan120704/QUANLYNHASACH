@@ -12,6 +12,8 @@ namespace BLL.IServices
         bool AddConsumer(Consumer consumer);
         bool DeleteConsumer(Consumer consumer);
         bool UpdateConsumer(Consumer consumer);
+        string GetConsumerNameByID(int consumerID);
+        string GetConsumerPhoneByID(int consumerID);
         List<Consumer> GetAllConsumer();
         bool AddConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created);
         bool UpdateConsumer(string consumerName, string address, string phone, string email, int debt, DateTime created);

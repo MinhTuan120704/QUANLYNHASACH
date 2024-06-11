@@ -16,6 +16,7 @@ namespace BLL.IServices
         bool DeleteBook(Book book);
         bool CheckBookExist(Book book);
         int GetBookID(string bookName, string author);
+        Book? GetBookByID(int bookID);
         List<Book> SearchBook(string bookName);
         List<Book> FilterBook(string? bookType, string? author, string? publisher);
         List<string> GetBookTypes();

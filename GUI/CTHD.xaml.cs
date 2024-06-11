@@ -19,7 +19,7 @@ namespace GUI
     /// </summary>
     public partial class CTHD : Window
     {
-        public CTHD()
+        public CTHD(int orderID, int bookID)
         {
             InitializeComponent();
         }

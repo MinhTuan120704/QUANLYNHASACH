@@ -12,6 +12,7 @@ namespace DAL.IRepo
         bool AddBookOrder(BookOrder bookorder);
         bool UpdateBookOrder(BookOrder bookorder);
         bool DeleteBookOrder(BookOrder bookorder);
+        List<BookOrder> GetBookOrderByOrderIDFromDB(int orderID);
         List<BookOrder> GetAllFromDB();
     }
 }

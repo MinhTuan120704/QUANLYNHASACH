@@ -101,5 +101,15 @@ namespace BLL.Services
         {
             return _consumerRepo.SearchConsumerFromDB(consumername);
         }
+
+        public string GetConsumerNameByID(int consumerID)
+        {
+            return _consumerRepo.GetConsumerNameByIDFromDB(consumerID);
+        }
+
+        public string GetConsumerPhoneByID(int consumerID)
+        {
+            return _consumerRepo.GetConsumerPhoneByIDFromDB(consumerID);
+        }
     }
 }
