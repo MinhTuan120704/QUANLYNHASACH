@@ -45,7 +45,9 @@ namespace GUI
         public ObservableCollection<string> BookTypes { get; set; }
         public ObservableCollection<string> Publishers { get; set; }
         public ObservableCollection<string> Authors { get; set; }
+        public int actualquantity { get; set; }
         private static BookService bookService;
+        private static ConstraintsService constraintsService;
         private static bool isAdminBorderVisible;
         private static int PreviousSelectedFilter_BookType = -1;
         private static int PreviousSelectedFilter_Author = -1;
@@ -231,6 +233,8 @@ namespace GUI
         private void add_Click(object sender, RoutedEventArgs e)
         {
             bookService = new BookService();
+            constraintsService = new ConstraintsService();
+            int qd1 = int.Parse(constraintsService.GetConstraintValue("QĐ1"));
             if ((bookName.Text == "") || (bookType.Text == "") || (author.Text == "") || (publisher.Text == "") || (quantity.Text == "") || (unitPrice.Text == "") )
             {
                 MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -258,15 +262,24 @@ namespace GUI
 
                 if (int.TryParse(quantity.Text, out Quantity) && int.TryParse(unitPrice.Text, out UnitPrice))
                 {
-                    if (bookService.AddBook(bookName.Text, bookType.Text, author.Text, publisher.Text, Quantity, UnitPrice))
+                    if (Quantity < qd1)
                     {
-                        MessageBox.Show("Thêm sách thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        LoadBooks();
-                        addBookBorder.Visibility = Visibility.Hidden;
+                        MessageBox.Show("Số lượng nhập tối thiểu là " + qd1.ToString(), "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        quantity.Text = "";
                     }
                     else
                     {
-                        MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        if (bookService.AddBook(bookName.Text, bookType.Text, author.Text, publisher.Text, Quantity, UnitPrice))
+                        {
+                            MessageBox.Show("Thêm sách thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            LoadBooks();
+                            addBookBorder.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sách đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+
                     }
                     
                 }
@@ -297,15 +310,28 @@ namespace GUI
 
         private void updateBook_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            bookService = new BookService();
+            constraintsService = new ConstraintsService();
+            int qd1 = int.Parse(constraintsService.GetConstraintValue("QĐ1"));
+            int qd2 = int.Parse(constraintsService.GetConstraintValue("QĐ2"));
             if (BooksListView.SelectedItem is Book selectedBook)
             {
-                bookName_update.Text = selectedBook.BookName;
-                bookType_update.Text = selectedBook.BookType;
-                author_update.Text = selectedBook.Author;
-                publisher_update.Text = selectedBook.Publisher;
-                quantity_update.Text = selectedBook.Quantity.ToString();
-                unitPrice_update.Text = selectedBook.UnitPrice.ToString();
-                updateBookBorder.Visibility = Visibility.Visible;
+                if(qd2 < selectedBook.Quantity)
+                {
+                    MessageBox.Show("Số lượng sách tồn trong kho nhiều nhất là " + qd2.ToString(), "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
+                else
+                {
+                    actualquantity = selectedBook.Quantity;
+                    bookName_update.Text = selectedBook.BookName;
+                    bookType_update.Text = selectedBook.BookType;
+                    author_update.Text = selectedBook.Author;
+                    publisher_update.Text = selectedBook.Publisher;
+                    quantity_update.Text = "";
+                    unitPrice_update.Text = selectedBook.UnitPrice.ToString();
+                    updateBookBorder.Visibility = Visibility.Visible;
+                }
             }
             else
             {
@@ -321,6 +347,9 @@ namespace GUI
         private void update_Click(object sender, RoutedEventArgs e)
         {
             bookService = new BookService();
+            constraintsService = new ConstraintsService();
+            int qd1 = int.Parse(constraintsService.GetConstraintValue("QĐ1"));
+            int qd2 = int.Parse(constraintsService.GetConstraintValue("QĐ2"));
             if ((bookName_update.Text == "") || (bookType_update.Text == "") || (author_update.Text == "") || (publisher_update.Text == "") || (quantity_update.Text == "") || (unitPrice_update.Text == ""))
             {
                 MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -348,12 +377,21 @@ namespace GUI
 
                 if (int.TryParse(quantity_update.Text, out Quantity) && int.TryParse(unitPrice_update.Text, out UnitPrice))
                 {
-                    if (bookService.UpdateBook(bookName_update.Text, bookType_update.Text, author_update.Text, publisher_update.Text, Quantity, UnitPrice))
+                    if (Quantity < qd1)
                     {
-                        MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        LoadBooks();
-                        updateBookBorder.Visibility = Visibility.Hidden;
-                    } 
+                        MessageBox.Show("Số lượng nhập tối thiểu là " + qd1.ToString(), "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        quantity.Text = "";
+                    }
+                    else
+                    {
+
+                        if (bookService.UpdateBook(bookName_update.Text, bookType_update.Text, author_update.Text, publisher_update.Text, Quantity + actualquantity, UnitPrice))
+                        {
+                            MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            LoadBooks();
+                            updateBookBorder.Visibility = Visibility.Hidden;
+                        } 
+                    }
                 }
             }
         }
