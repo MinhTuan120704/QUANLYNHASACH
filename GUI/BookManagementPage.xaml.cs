@@ -277,7 +277,6 @@ namespace GUI
             bookService = new BookService();
             if (BooksListView.SelectedItem is Book selectedBook)
             {
-                bookService = new BookService();
                 bookService.DeleteBook(selectedBook);
                 
                     MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);

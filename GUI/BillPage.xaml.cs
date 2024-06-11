@@ -422,5 +422,21 @@ namespace GUI
             dataGridDetailsBookOrder.Items.Clear();
             
         }
+
+        private void XoaHoaDon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            orderService = new OrderService();
+
+            if (OrdersListView.SelectedItem is Order order)
+            {
+                orderService.DeleteOrder(order);
+                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadOrders();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }
