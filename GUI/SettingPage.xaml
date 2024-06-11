@@ -78,23 +78,26 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock  Grid.Row="1"
+                        x:Name="account"    
                         Text="Cài đặt tài khoản" 
                         FontFamily="Verdana" 
                         FontSize="28" 
                         FontWeight="Bold" 
                         VerticalAlignment="Center" 
-                        HorizontalAlignment="Center"/>
+                        HorizontalAlignment="Center" MouseLeftButtonUp="account_MouseLeftButtonUp" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave"/>
 
                 <TextBlock  Grid.Row="2"
+                        x:Name="system"
                         Text="Cài đặt hệ thống" 
                         FontFamily="Verdana" 
                         FontSize="28" 
                         FontWeight="Bold" 
                         VerticalAlignment="Center" 
-                        HorizontalAlignment="Center"/>
+                        HorizontalAlignment="Center" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="system_MouseLeftButtonUp"/>
             </Grid>
         </Border>
-        <Border Grid.Column="1"
+        <Border x:Name="borderAccount"
+            Grid.Column="1"
             Grid.Row="1"
             Height="851"
             Width="1368"
@@ -102,18 +105,444 @@
             Background="#FFEEEE" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Top"
+            Visibility="Visible"
             Margin="0,0,0,59">
-            <Grid>
-                <TextBlock Text="Cài đặt tài khoản" FontSize="40" Height="60" VerticalAlignment="Top" FontWeight="ExtraBold" FontStyle="Italic" FontFamily="Verdana" Margin="77,106,16,0"></TextBlock>
+            <Grid Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="124" />
+                    <RowDefinition Height="*"/>
+
+
+                </Grid.RowDefinitions>
+                <TextBlock Text="Cài đặt tài khoản" FontSize="40" Height="60" VerticalAlignment="Center" FontWeight="ExtraBold" FontStyle="Italic" FontFamily="Verdana" Margin="77,0,16,0"/>
+
+                <Border 
+                    Grid.Row="1"
+                    Width="1368"
+                    CornerRadius ="0,0,45,45"
+                    Background="#FFEEEE" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,59,0,200">
+                    <ListView x:Name="AccountsListView" BorderThickness="0" Background="Transparent" FontFamily="Verdana" FontSize="24" Foreground="Black">
+                        <ListView.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="0,0,45,45"/>
+                                <Setter Property="Background" Value="#FFEEEE"/>
+                            </Style>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn  Header="Account Name" DisplayMemberBinding="{Binding AccountName}" />
+                                <GridViewColumn  Header="Password" DisplayMemberBinding="{Binding Password}" />
+                                <GridViewColumn  Header="Position" DisplayMemberBinding="{Binding Position}" />
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+                <Grid Grid.Row="2" Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                    <TextBlock x:Name="updateAccount"  
+                        Text="Sửa tài khoản" 
+                        FontFamily="Verdana" 
+                        FontSize="28" 
+                        FontWeight="Bold" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Margin="135,0,0,0" MouseLeftButtonUp="updateAccount_MouseLeftButtonUp"/>
+                    <TextBlock x:Name="addAccount"   
+                        Text="Thêm tài khoản" 
+                        FontFamily="Verdana" 
+                        FontSize="28" 
+                        FontWeight="Bold" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Margin="0,0,135,0" MouseLeftButtonUp="addAccount_MouseLeftButtonUp"/>
+                    <TextBlock x:Name="deleteAccount"   
+                        Text="Xóa tài khoản" 
+                        FontFamily="Verdana" 
+                        FontSize="28" 
+                        FontWeight="Bold" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Margin="0,0,0,0" MouseLeftButtonUp="deleteAccount_MouseLeftButtonUp" />
+
+                </Grid>
             </Grid>
-        </Border> 
-            
+        </Border>
+        <Border x:Name="addAccountBorder"
+             Grid.Column="1"
+             Grid.Row="1"
+             Width="890"
+             Height="700"
+             Background="#FEF7F7"
+             CornerRadius="20"
+             Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Button 
+                    Width="45" 
+                    Height="45" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0, 12, 12, 0"   
+                    BorderBrush="{x:Null}" 
+                    Background="{x:Null}" Click="closeBorder_addAccount" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" >
+                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Grid Margin="95,30,0,0" Height="50" VerticalAlignment="Top">
+                    <TextBlock Text="Thêm tài khoản mới" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
+                </Grid>
+                <Grid Margin="95,120,95,120">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Tên" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="accountName"
+                        BorderThickness="0" 
+                        FontSize="28" 
+                        FontFamily="Verdana" 
+                        Margin="200,15,0,15" 
+                        HorizontalContentAlignment="Stretch" 
+                        VerticalContentAlignment="Center" 
+                        Background="#F3F0F0" />
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock Text="Mật khẩu" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="password"
+                        BorderThickness="0" 
+                        FontSize="28" 
+                        FontFamily="Verdana" 
+                        Margin="200,15,0,15" 
+                        HorizontalContentAlignment="Stretch" 
+                        VerticalContentAlignment="Center" 
+                        Background="#F3F0F0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <TextBlock Text="Chức vụ" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="position"
+                        BorderThickness="0" 
+                        FontSize="28" 
+                        FontFamily="Verdana" 
+                        Margin="200,15,0,15" 
+                        HorizontalContentAlignment="Stretch" 
+                        VerticalContentAlignment="Center" 
+                        Background="#F3F0F0"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="3">
+                        <TextBlock Text="Ngày tạo" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="created"
+                        BorderThickness="0" 
+                        FontSize="28" 
+                        FontFamily="Verdana" 
+                        Margin="200,15,0,15" 
+                        HorizontalContentAlignment="Stretch" 
+                        VerticalContentAlignment="Center" 
+                        Background="#F3F0F0"/>
+                    </Grid>
+                </Grid>
+                <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                    <Button x:Name="add"
+                        Width="144"
+                        Height="64"
+                        BorderThickness="0"
+                        Background="#290F75"   
+                        IsDefault="True" Margin="700,0,0,0" Click="add_Click" DragEnter="add_Click" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <Grid>
+                            <TextBlock Foreground="#FEF7F7"
+                    Text="Thêm"
+                    FontSize="28" 
+                    FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </Button>
+                    <TextBlock x:Name="cancel" 
+                        Foreground="#290F75"
+                        Text="Hủy" 
+                        Width="80"
+                        FontSize="28" 
+                        FontFamily="Verdana" 
+                        Margin="460,0,0,0" 
+                        TextAlignment="Center"   
+                        VerticalAlignment="Center" 
+                        MouseEnter="event_MouseEnter" 
+                        MouseLeave="event_MouseLeave" 
+                        MouseLeftButtonUp="closeBorder_addAccount" />
+                </Grid>
+
+            </Grid>
+        </Border>
+        <Border x:Name="updateAccountBorder"
+             Grid.Column="1"
+             Grid.Row="1"
+             Width="890"
+             Height="700"
+             Background="#FEF7F7"
+             CornerRadius="20"
+             Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Button 
+                    Width="45" 
+                    Height="45" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0, 12, 12, 0"   
+                    BorderBrush="{x:Null}" 
+                    Background="{x:Null}"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="Button_Click" >
+                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Grid Margin="95,30,0,0" Height="50" VerticalAlignment="Top">
+                    <TextBlock Text="Sửa tải khoản" FontSize="34" FontWeight="Black" FontFamily="Verdana" Margin="0,6,0,0"  ></TextBlock>
+                </Grid>
+                <Grid Margin="95,120,95,120">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Tên" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="accountName_update"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="200,15,0,15" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0" />
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock Text="Mật khẩu" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="password_update"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="200,15,0,15" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <TextBlock Text="Chức vụ" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="position_update"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="200,15,0,15" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="3">
+                        <TextBlock Text="Ngày tạo" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                        <TextBox x:Name="created_update"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="200,15,0,15" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0"/>
+                    </Grid>
+                </Grid>
+                <Grid Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                    <Button x:Name="update"
+                        Width="144"
+                        Height="64"
+                        BorderThickness="0"
+                        Background="#290F75"   
+                        IsDefault="True" Margin="700,0,0,0"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="update_Click" DragEnter="update_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <Grid>
+                            <TextBlock Foreground="#FEF7F7"
+                    Text="Sửa"
+                    FontSize="28" 
+                    FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </Button>
+                    <TextBlock 
+                        Foreground="#290F75"
+                        Text="Hủy" 
+                        Width="80"
+                        FontSize="28" 
+                        FontFamily="Verdana" 
+                        Margin="460,0,0,0" 
+                        TextAlignment="Center"   
+                        VerticalAlignment="Center" 
+                        MouseEnter="event_MouseEnter" 
+                        MouseLeave="event_MouseLeave" 
+                        MouseLeftButtonUp="Button_Click" />
+                </Grid>
+
+            </Grid>
+        </Border>
+        <Border x:Name="borderSystem"
+            Grid.Column="1"
+            Grid.Row="1"
+            Height="851"
+            Width="1368"
+            CornerRadius="45"
+            Background="#FFEEEE" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Visibility="Hidden"
+            Margin="0,0,0,59">
+            <Grid Margin="77,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Cài đặt hệ thống" FontSize="40" Height="60" VerticalAlignment="Top" FontWeight="ExtraBold" FontStyle="Italic" FontFamily="Verdana" Margin="0,70,16,0"></TextBlock>
+                <Grid Grid.Row="1">
+                    <TextBlock  Text="Số lượng nhập ít nhất là " FontSize="40" Height="60" VerticalAlignment="Top" FontFamily="Verdana" Margin="0,70,16,0"></TextBlock>
+                    <TextBox x:Name="qd1"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="800,0,124,0" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <TextBlock  Text="Số lượng sách tồn nhiều nhất là " FontSize="40" Height="60" VerticalAlignment="Top" FontFamily="Verdana" Margin="0,70,16,0"></TextBlock>
+                    <TextBox x:Name="qd2"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="800,0,124,0" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0" />
+                </Grid>
+                <Grid Grid.Row="3">
+                    <TextBlock  Text="Số nợ tối đa là " FontSize="40" Height="60" VerticalAlignment="Top" FontFamily="Verdana" Margin="0,70,16,0"></TextBlock>
+                    <TextBox x:Name="qd3"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="800,0,124,0" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0" />
+                </Grid>
+                <Grid Grid.Row="4">
+                    <TextBlock  Text="Số lượng tồn sau khi bán ít nhất là " FontSize="40" Height="60" VerticalAlignment="Top" FontFamily="Verdana" Margin="0,70,16,0"></TextBlock>
+                    <TextBox x:Name="qd4"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="800,0,124,0" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0" />
+                </Grid>
+                <Grid Grid.Row="5">
+                    <TextBlock  Text="Số tiền thu  " FontSize="40" Height="60" VerticalAlignment="Top" FontFamily="Verdana" Margin="0,70,16,0"></TextBlock>
+                    <TextBox x:Name="qd5"
+                            BorderThickness="0" 
+                            FontSize="28" 
+                            FontFamily="Verdana" 
+                            Margin="800,0,124,0" 
+                            HorizontalContentAlignment="Stretch" 
+                            VerticalContentAlignment="Center" 
+                            Background="#F3F0F0" />
+                </Grid>
+                <Grid  Grid.Row="6" Height="100" VerticalAlignment="Bottom" Margin="0,0,0,20">
+                    <Button x:Name="filter"
+                    Width="144"
+                    Height="64"
+                    BorderThickness="0"
+                    Background="#290F75"   
+                    IsDefault="True" Margin="900,0,0,0"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="filter_Click" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <Grid>
+                            <TextBlock Foreground="#FEF7F7"
+                            Text="Sửa"
+                            FontSize="28" 
+                            FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+
+
         <Border x:Name="adminBorder"
             Width="395"
             Height="310"
             Background="#FFFFEE"
             CornerRadius="20"
-            Visibility="Collapsed" Grid.Column="1" Margin="1168,0,10,629" Grid.Row="1">
+            Visibility="Hidden" Grid.Column="1" Margin="1168,0,10,629" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

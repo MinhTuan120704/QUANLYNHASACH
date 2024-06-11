@@ -82,6 +82,7 @@ namespace GUI
             }
             else
             {
+                GlobalVariables.UserText = user.Text.ToString();
                 MainPage newPage = new MainPage();
                 // Điều hướng đến trang mới
                 this.NavigationService.Navigate(newPage);

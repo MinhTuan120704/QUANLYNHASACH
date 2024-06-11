@@ -13,5 +13,11 @@ namespace DAL.IRepo
         bool UpdateAccount(Account account);
         bool DeleteAccount(Account account);
         List<Account> GetAllFromDB();
+
+        string GetAccountPosition(string name);
+
+        bool GetExistAccount(Account account);
+
+        int GetAccountID(string name);
     }
 }

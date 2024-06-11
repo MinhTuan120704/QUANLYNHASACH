@@ -10,5 +10,7 @@ namespace DAL.IRepo
     public interface IConstraintsRepo
     {
         bool UpdateConstraint(Constraints constraint);
+        int GetConstraintID(string name);
+        string GetConstraintValue(string name);
     }
 }

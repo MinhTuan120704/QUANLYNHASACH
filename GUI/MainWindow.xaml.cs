@@ -31,4 +31,10 @@ namespace GUI
             this.WindowStyle = WindowStyle.None;
         }
     }
+
+    public static class GlobalVariables
+    {
+        public static string UserText { get; set; }
+    }
+
 }
