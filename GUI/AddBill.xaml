@@ -36,7 +36,7 @@
                         <SkewTransform/>
                         <TranslateTransform/>
                     </TransformGroup>
-                </TextBlock.RenderTransform>Thêm hóa đơn
+                </TextBlock.RenderTransform>Thêm hóa đơn mới
             </TextBlock>
         </Grid>
         <Grid Margin="49,103,1153,826" Grid.Column="0" RenderTransformOrigin="0.414,0.526">

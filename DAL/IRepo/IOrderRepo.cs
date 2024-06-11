@@ -12,6 +12,7 @@ namespace DAL.IRepo
         bool AddOrder(Order order);
         bool DeleteOrder(Order order);
         bool UpdateOrder(Order order);
+        int GetOrderIDFromDB(int consumerID, DateTime date);
         List<Order> GetAllFromDB();
     }
 }

@@ -126,6 +126,11 @@ namespace BLL.Services
             return _bookRepo.GetAuthorsFromDB();
         }
 
+        public Book? GetBookByID(int bookID)
+        {
+            return _bookRepo.GetBookByIDFromDB(bookID);
+        }
+
         public int GetBookID(string bookName, string author)
         {
             return _bookRepo.GetBookIDFromDB(bookName, author);

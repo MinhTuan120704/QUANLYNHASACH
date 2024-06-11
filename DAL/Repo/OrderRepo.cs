@@ -35,6 +35,11 @@ namespace DAL.Repo
             return _context.Orders.ToList();
         }
 
+        public int GetOrderIDFromDB(int consumerID, DateTime date)
+        {
+            return _context.Orders.Where(o => o.ConsumerID == consumerID &&  o.Date == date).Select(o => o.OrderID).FirstOrDefault();
+        }
+
         public bool UpdateOrder(Order order)
         {
             _context.Orders.Update(order);

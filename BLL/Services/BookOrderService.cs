@@ -35,6 +35,11 @@ namespace BLL.Services
             return _bookOrderRepo.GetAllFromDB();
         }
 
+        public List<BookOrder> GetBookOrderbyOrderID(int orderID)
+        {
+            return _bookOrderRepo.GetBookOrderByOrderIDFromDB(orderID);
+        }
+
         public bool UpdateBookOrder(BookOrder bookorder)
         {
             _bookOrderRepo.UpdateBookOrder(bookorder);

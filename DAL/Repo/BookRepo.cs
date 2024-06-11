@@ -105,6 +105,11 @@ namespace DAL.Repo
             return _context.Books.Select(book => book.Author).Distinct().ToList();
         }
 
+        public Book? GetBookByIDFromDB(int bookID)
+        {
+            return _context.Books.Where(book => book.BookID == bookID).FirstOrDefault();
+        }
+
         public int GetBookIDFromDB(string bookName, string author)
         {
             return _context.Books.Where(book => book.BookName == bookName && book.Author == author).Select(book => book.BookID).FirstOrDefault();

@@ -15,6 +15,7 @@ namespace DAL.IRepo
         bool DeleteBook(Book book);
         bool CheckBookExistFromDB(Book book);
         int GetBookIDFromDB(string bookName, string author);
+        Book? GetBookByIDFromDB(int bookID);
         List<Book> SearchBookFromDB(string bookName);
         List<Book> FilterBookFromDB(string condition1, string value1);
         List<Book> FilterBookFromDB(string condition1, string value1, string condition2, string value2);

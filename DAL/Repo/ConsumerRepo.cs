@@ -58,5 +58,14 @@ namespace DAL.Repo
             return _context.Consumers.Where(p => p.ConsumerName.ToLower() == consumername.ToLower()).ToList();
         }
 
+        public string GetConsumerNameByIDFromDB(int consumerID)
+        {
+            return _context.Consumers.Where(c => c.ConsumerID == consumerID).Select(c => c.ConsumerName).FirstOrDefault();
+        }
+
+        public string GetConsumerPhoneByIDFromDB(int consumerID)
+        {
+            return _context.Consumers.Where(c => c.ConsumerID == consumerID).Select(c => c.Phone).FirstOrDefault();
+        }
     }
 }

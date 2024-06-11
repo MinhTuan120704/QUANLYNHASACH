@@ -12,6 +12,7 @@ namespace BLL.IServices
         bool AddBookOrder(BookOrder bookorder);
         bool UpdateBookOrder(BookOrder bookorder);
         bool DeleteBookOrder(BookOrder bookorder);
+        List<BookOrder> GetBookOrderbyOrderID(int orderID);
         List<BookOrder> GetAllBookOrder();
     }
 }
