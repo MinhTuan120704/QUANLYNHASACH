@@ -111,5 +111,15 @@ namespace BLL.Services
         {
             return _consumerRepo.GetConsumerPhoneByIDFromDB(consumerID);
         }
+
+        public int GetDebtByPhone(string phone)
+        {
+            return _consumerRepo.GetDebtByPhoneFromDB(phone);
+        }
+
+        public Consumer? GetConsumerByID(int consumerID)
+        {
+            return _consumerRepo.GetConsumerByIDFromDB(consumerID);
+        }
     }
 }

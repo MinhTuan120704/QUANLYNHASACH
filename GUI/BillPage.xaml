@@ -158,7 +158,7 @@
               Background="#6420AA"
               HorizontalAlignment="Center"
               VerticalAlignment="Top" Margin="0,200,0,0" Grid.Row="1" Grid.Column="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="CTHD_MouseLeftButtonUp">
-            <TextBlock FontSize="28" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Chi tiết hóa đơn</TextBlock>
+            <TextBlock Name="CTHD_TextBlock" FontSize="28" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Chi tiết hóa đơn</TextBlock>
         </Border>
         <Border x:Name="adminBorder"
              Width="395"

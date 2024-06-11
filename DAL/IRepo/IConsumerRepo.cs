@@ -16,6 +16,8 @@ namespace DAL.IRepo
         int GetConsumerIDFromDB(string phone);
         string GetConsumerNameByIDFromDB(int consumerID);
         string GetConsumerPhoneByIDFromDB(int consumerID);
+        int GetDebtByPhoneFromDB(string phone);
+        Consumer? GetConsumerByIDFromDB(int consumerID);
         List<Consumer> SearchConsumerFromDB(string consumername);
         List<Consumer> GetAllFromDB();
     }
