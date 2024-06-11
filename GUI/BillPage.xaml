@@ -150,16 +150,7 @@
             </Button.Template>
             <materialDesign:PackIcon Kind="AccountCircleOutline" Width="102" Height="100"  VerticalAlignment="Center" Margin="10,0,0,0"/>
         </Button>
-        <Border
-          Height="80"
-          Width="280"
-          CornerRadius="50"
-          Background="#6420AA"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Top" Margin="0,736,0,0" Grid.Row="1" Grid.Column="1" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" >
-            <TextBlock FontSize="28" FontFamily="Verdana" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Xuất hóa đơn</TextBlock>
-        </Border>
-
+        
         <Border
               Height="80"
               Width="280"
@@ -874,6 +865,17 @@ MouseLeave="event_MouseLeave" MouseLeftButtonUp="XoaSach_MouseLeftButtonUp">
                         <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="1125*"/>
                     </Grid.ColumnDefinitions>
+                    <Border
+                      Height="64"
+                      Width="280"
+                      CornerRadius="25"
+                      Background="#290F75"
+                      HorizontalAlignment="Right" 
+                      Margin="0,0,250,0"
+                      VerticalAlignment="Center" Grid.Column="2" MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" MouseLeftButtonUp="XHD_MouseLeftButtonUp" >       
+                        <TextBlock FontSize="28" FontFamily="Verdana" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF">Xuất hóa đơn</TextBlock>
+                    </Border>
+
                     <Button x:Name="addBookOrder"
                             Width="144"
                             Height="64"
