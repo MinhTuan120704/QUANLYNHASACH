@@ -132,7 +132,7 @@ namespace GUI
             phone.Text = ""; 
             email.Text = ""; 
             debt.Text = ""; 
-            created.Text = "";
+            created.Text = DateTime.Now.ToString();
             addCustomerBorder.Visibility = Visibility.Visible;
         }
         private void event_MouseEnter(object sender, MouseEventArgs e)

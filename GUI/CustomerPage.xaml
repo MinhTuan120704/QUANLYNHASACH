@@ -143,12 +143,12 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn  Header="Customer Name" DisplayMemberBinding="{Binding ConsumerName}" />
-                        <GridViewColumn  Header="Address" DisplayMemberBinding="{Binding Address}" />
-                        <GridViewColumn  Header="Phone" DisplayMemberBinding="{Binding Phone}" />
+                        <GridViewColumn  Header="Tên khách hàng" DisplayMemberBinding="{Binding ConsumerName}" />
+                        <GridViewColumn  Header="Địa chỉ" DisplayMemberBinding="{Binding Address}" />
+                        <GridViewColumn  Header="SĐT" DisplayMemberBinding="{Binding Phone}" />
                         <GridViewColumn  Header="Email" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn  Header="Debt" DisplayMemberBinding="{Binding Debt}" />
-                        <GridViewColumn  Header="Created" DisplayMemberBinding="{Binding Created}" />
+                        <GridViewColumn  Header="Số nợ" DisplayMemberBinding="{Binding Debt}" />
+                        <GridViewColumn  Header="Ngày tạo" DisplayMemberBinding="{Binding Created}" />
                     </GridView>
                 </ListView.View>
             </ListView>
