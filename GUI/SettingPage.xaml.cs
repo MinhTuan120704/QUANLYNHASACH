@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,6 +34,18 @@ namespace GUI
         private static ConstraintsService constraintsService;
         private static AccountService accountService;
         public ObservableCollection<Account> Accounts { get; set; }
+
+        private bool IsValidPassword(string password)
+        {
+            // Define the regular expression pattern for the password
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$";
+
+            // Create a regex object
+            Regex regex = new Regex(pattern);
+
+            // Check if the password matches the pattern
+            return regex.IsMatch(password);
+        }
 
         public SettingPage()
         {
@@ -215,17 +228,24 @@ namespace GUI
 
                 if (DateTime.TryParse(created.Text, out Created))
                 {
-                    if (accountService.AddAccount(accountName.Text, password.Text, position.Text, Created))
-                    {
-                        MessageBox.Show("Thêm tài khoản thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        LoadAccounts();
-                        addAccountBorder.Visibility = Visibility.Hidden;
+                    if (IsValidPassword(password.Text)){
+                        if (accountService.AddAccount(accountName.Text, password.Text, position.Text, Created))
+                        {
+                            MessageBox.Show("Thêm tài khoản thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            LoadAccounts();
+                            addAccountBorder.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tài khoản đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Tài khoản đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                        MessageBox.Show("Không được nhập sai định dạng mật khẩu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        password.Text = "";
 
+                    }
                 }
             }
 
@@ -255,13 +275,21 @@ namespace GUI
 
                 if (DateTime.TryParse(created_update.Text, out Created))
                 {
-                    if (accountService.UpdateAccount(accountName_update.Text, password_update.Text, position_update.Text, Created))
-                    {
-                        MessageBox.Show("Sửa tài khoản thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        LoadAccounts();
-                        updateAccountBorder.Visibility= Visibility.Hidden;
-                    }
+                    if (IsValidPassword(password_update.Text))
+                    { 
+                        if (accountService.UpdateAccount(accountName_update.Text, password_update.Text, position_update.Text, Created))
+                        {
+                            MessageBox.Show("Sửa tài khoản thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            LoadAccounts();
+                            updateAccountBorder.Visibility= Visibility.Hidden;
+                        }
                     
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nhập đúng định dạng mật khẩu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        password_update.Text = "";
+                    }
 
                 }
             }

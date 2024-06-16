@@ -373,7 +373,7 @@ namespace GUI
                 {
                     BookSell? bookSell = (BookSell)dataGridDetails.Items[i];
                     BookOrder bookOrder = new BookOrder();  
-                    bookOrder.OrderID = orderService.GetOrderID(order.ConsumerID,order.Date);,
+                    bookOrder.OrderID = orderService.GetOrderID(order.ConsumerID,order.Date);
                     bookOrder.BookID = bookSell.BookID;
                     bookOrder.Quantity = bookSell.Quantity;
                     bookOrderService.AddBookOrder(bookOrder);
