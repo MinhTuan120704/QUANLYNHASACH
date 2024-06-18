@@ -32,6 +32,24 @@ namespace GUI
             InitializeComponent();
             accountService = new AccountService();
             position = accountService.GetAccountPosition(GlobalVariables.UserText);
+            if (position == "NhanVien")
+            {
+                bookManagementButton.IsEnabled = false;
+                statisticButton.IsEnabled = false;
+                settingButton.IsEnabled = false;
+                bookManagementButton.Background = Brushes.LightGray;
+                statisticButton.Background = Brushes.LightGray;
+                settingButton.Background = Brushes.LightGray;
+            }
+            else
+            {
+                bookManagementButton.IsEnabled = true;
+                statisticButton.IsEnabled = true;
+                settingButton.IsEnabled = true;
+                bookManagementButton.Background = Brushes.White;
+                statisticButton.Background = Brushes.White;
+                settingButton.Background = Brushes.White;
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

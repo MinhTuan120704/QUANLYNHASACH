@@ -285,23 +285,6 @@ namespace GUI
                 }
             }
         }
-        private void deleteBook_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
-        {
-            bookService = new BookService();
-            if (BooksListView.SelectedItem is Book selectedBook)
-            {
-                bookService.DeleteBook(selectedBook);
-                
-                    MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    LoadBooks();
-                
-                
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn một cuốn sách để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
 
         private void closeBorder_addBook(object sender, RoutedEventArgs e)
         {

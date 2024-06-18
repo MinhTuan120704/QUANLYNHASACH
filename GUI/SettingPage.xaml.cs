@@ -202,6 +202,7 @@ namespace GUI
         private void addAccount_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             addAccountBorder.Visibility = Visibility.Visible;
+            created.Text = DateTime.Now.ToString();
         }
 
         private void closeBorder_addAccount(object sender, RoutedEventArgs e)
@@ -213,18 +214,14 @@ namespace GUI
         private void add_Click(object sender, RoutedEventArgs e)
         {
             accountService = new AccountService();
+            
             if ((accountName.Text == "") || (password.Text == "") || (position.Text == "") || (created.Text == ""))
             {
                 MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                DateTime Created;
-                if (DateTime.TryParse(created.Text, out Created) == false)
-                {
-                    created.Text = "";
-                    MessageBox.Show("Không được nhập sai kiểu dữ liệu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                DateTime Created = DateTime.Parse(created.Text);
 
                 if (DateTime.TryParse(created.Text, out Created))
                 {

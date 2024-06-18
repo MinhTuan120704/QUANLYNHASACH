@@ -46,13 +46,12 @@ namespace GUI
 
         private void passWord_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (passWord.Text == "Password")
+            if (password.Visibility == Visibility.Visible)
             {
-                passWord.Text = string.Empty;
+                password.Visibility = Visibility.Hidden;
                 passWord.Opacity = 1;
-
             }
-
+        
         }
 
         private void loginButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -76,7 +75,7 @@ namespace GUI
             //newWindow.Show();
 
             //this.Close();
-            if (login.CheckLoginBLL(user.Text.ToString(), passWord.Text.ToString()) == 0)
+            if (login.CheckLoginBLL(user.Text.ToString(), passWord.Password.ToString()) == 0)
             {
                 MessageBox.Show("không tồn tại");
             }
