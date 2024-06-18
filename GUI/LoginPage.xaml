@@ -10,7 +10,7 @@
 
     <Grid>
         <!-- Background gradient -->
-        <Rectangle>
+        <Rectangle Margin="0,30,0,-30">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="background.jpg" />
             </Rectangle.Fill>
@@ -51,8 +51,8 @@
                     <Grid>
                         <TextBox
                     x:Name="user"
-                    BorderThickness="0" 
                     Text="Username"
+                    BorderThickness="0" 
                     FontSize="28" 
                     FontFamily="Verdana" 
                     Width="400"
@@ -75,12 +75,19 @@
                 Width="563" 
                 Height="78"
                 CornerRadius="25,25,25,25"
-                Background="#F2E3E3" Margin="213,326,213,174">
+                Background="#F2E3E3" Margin="213,356,213,144">
                     <Grid>
-                        <TextBox
-                    x:Name="passWord"
+                        <TextBlock Name="password"
+                            Text="Password" 
+                                    Visibility="Visible"
+                                    FontSize="28" 
+                                    FontFamily="Verdana" 
+                                    Width="400"
+                                    Margin="120,20,43,16"  
+                                    Background="{x:Null}" Opacity="0.6"/>
+                        <PasswordBox
+                    x:Name="passWord"                 
                     BorderThickness="0" 
-                    Text="Password"
                     FontSize="28" 
                     FontFamily="Verdana" 
                     Width="400"
@@ -88,9 +95,7 @@
                     HorizontalContentAlignment="Stretch" 
                     VerticalContentAlignment="Center" 
                     Background="{x:Null}" Opacity="0.6" 
-                    GotFocus="passWord_GotFocus" TextChanged="passWord_TextChanged" 
-
-                    />
+                            GotFocus="passWord_GotFocus"/>
                         <Border Width="90"
                         Height="78"
                         CornerRadius="25,0,0,25"
@@ -103,7 +108,7 @@
                 Width="233"
                 Height="78"
                 BorderThickness="0"
-                Background="#FCDEDE" Margin="378,446,378,54"
+                Background="#FCDEDE" Margin="378,474,378,26"
                 Click="loginButton_Click"
                 MouseEnter="loginButton_MouseEnter" 
                 MouseLeave="loginButton_MouseLeave" DragEnter="loginButton_Click" 

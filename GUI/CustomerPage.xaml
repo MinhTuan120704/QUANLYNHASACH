@@ -94,15 +94,7 @@
                     FontWeight="Bold" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" MouseLeftButtonUp="addCustomer_MouseLeftButtonUp" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave"/>
-
-            <TextBlock x:Name="deleteCustomer" Grid.Row="2"
-                    Text="Xóa" 
-                    FontFamily="Verdana" 
-                    FontSize="28" 
-                    FontWeight="Bold" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" MouseLeftButtonUp="deleteCustomer_MouseLeftButtonUp_1" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave"/>
-            <TextBlock x:Name="updateCustomer" Grid.Row="3"
+            <TextBlock x:Name="updateCustomer" Grid.Row="2"
                     Text="Sửa" 
                     FontFamily="Verdana" 
                     FontSize="28" 
@@ -111,7 +103,7 @@
                     HorizontalAlignment="Center"  MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave" MouseLeftButtonUp="updateCustomer_MouseLeftButtonUp"/>
 
             <TextBlock x:Name="DebtCustomer"
-                        Grid.Row="4"
+                        Grid.Row="3"
                         Text="Phiếu thu tiền" 
                         FontFamily="Verdana" 
                         FontSize="28" 

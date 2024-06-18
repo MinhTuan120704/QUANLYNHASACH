@@ -110,21 +110,13 @@
                     FontWeight="Bold" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" MouseLeftButtonUp="addBook_MouseLeftButtonUp" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave"/>
-
-            <TextBlock x:Name="deleteBook" Grid.Row="2"
-                    Text="Xóa sách" 
-                    FontFamily="Verdana" 
-                    FontSize="28" 
-                    FontWeight="Bold" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" MouseLeftButtonUp="deleteBook_MouseLeftButtonUp_1" MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave"/>
-            <TextBlock x:Name="updateBook" Grid.Row="3"
+            <TextBlock x:Name="updateBook" Grid.Row="2"
                     Text="Nhập thêm sách" 
                     FontFamily="Verdana" 
                     FontSize="28" 
                     FontWeight="Bold" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center"  MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave" MouseLeftButtonUp="updateBook_MouseLeftButtonUp"/>
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Center"  MouseEnter="adminButton_MouseEnter" MouseLeave="adminButton_MouseLeave" MouseLeftButtonUp="updateBook_MouseLeftButtonUp" Margin="0,48,0,0"/>
         </Grid>
 
         <Border Grid.Column="1"
@@ -167,8 +159,8 @@
                 Background="#FEF7F7"
                 CornerRadius="20"
                 Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
-             <Grid>
-                 <Button x:Name="closeButton"
+            <Grid>
+                <Button x:Name="closeButton"
                      Width="45" 
                      Height="45" 
                      HorizontalAlignment="Right"
@@ -176,27 +168,27 @@
                      Margin="0, 12, 12, 0"   
                      BorderBrush="{x:Null}" 
                      Background="{x:Null}" Click="closeButton_Click" MouseEnter="closeButton_MouseEnter" MouseLeave="closeButton_MouseLeave" >
-                     <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
-                     <Button.Template>
-                         <ControlTemplate TargetType="Button">
-                             <Border Background="{TemplateBinding Background}">
-                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                             </Border>
-                         </ControlTemplate>
-                     </Button.Template>
-                 </Button>
-                 <Grid Margin="95,61,0,0" Height="50" VerticalAlignment="Top">
-                     <materialDesign:PackIcon Kind="Filter" Width="50" Height="50"   />
-                     <TextBlock Text="Lọc" FontSize="28" FontFamily="Verdana" Margin="60,6,0,0"  ></TextBlock>
-                 </Grid>
-                 <Grid Width="681" Height="400" Margin="95, 0, 114, 0">
-                     <Grid.RowDefinitions>
-                         <RowDefinition Height="*" />
-                         <RowDefinition Height="*" />
-                         <RowDefinition Height="*" />
-                     </Grid.RowDefinitions>
-                     <Grid Grid.Row="0">
-                         <TextBlock Text="Thể loại" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="Close" Width="45" Height="45" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Grid Margin="95,61,0,0" Height="50" VerticalAlignment="Top">
+                    <materialDesign:PackIcon Kind="Filter" Width="50" Height="50"   />
+                    <TextBlock Text="Lọc" FontSize="28" FontFamily="Verdana" Margin="60,6,0,0"  ></TextBlock>
+                </Grid>
+                <Grid Width="681" Height="400" Margin="95, 0, 114, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Thể loại" FontSize="28" FontFamily="Verdana" VerticalAlignment="Center"/>
                         <ComboBox x:Name="BookTypeComboBox" 
                                   HorizontalAlignment="Right" 
                                   VerticalAlignment="Center"
@@ -244,27 +236,27 @@
                     BorderThickness="0"
                     Background="#290F75"   
                     IsDefault="True" Margin="700,0,0,0"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="filter_Click" DragEnter="filter_DragEnter">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="25"/>
-                        </Style>
-                    </Button.Resources>
-                    <Grid>
-                        <TextBlock Foreground="#FEF7F7"
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <Grid>
+                            <TextBlock Foreground="#FEF7F7"
                             Text="Lọc"
                             FontSize="28" 
                             FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-                    </Grid>
-                </Button>
-                <TextBlock  
+                        </Grid>
+                    </Button>
+                    <TextBlock  
                         Foreground="#290F75"
                         Text="Hủy" 
                         Width="80"
@@ -279,7 +271,7 @@
                 </Grid>
 
             </Grid>
-         </Border>
+        </Border>
         <Border x:Name="addBookBorder"
              Grid.ColumnSpan="3"
              Grid.RowSpan="2"
@@ -327,7 +319,7 @@
                         Margin="200,15,0,15" 
                         HorizontalContentAlignment="Stretch" 
                         VerticalContentAlignment="Center" 
-                        Background="#F3F0F0" />         
+                        Background="#F3F0F0" />
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -557,7 +549,7 @@
                         Height="64"
                         BorderThickness="0"
                         Background="#290F75"   
-                        IsDefault="True" Margin="700,0,0,0"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="update_Click" DragEnter="update_Click">       
+                        IsDefault="True" Margin="700,0,0,0"  MouseEnter="event_MouseEnter" MouseLeave="event_MouseLeave" Click="update_Click" DragEnter="update_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}">
@@ -672,7 +664,7 @@
                         </Button.Template>
                     </Button>
                 </Grid>
-            
+
 
             </Grid>
         </Border>

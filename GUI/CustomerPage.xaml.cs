@@ -192,24 +192,6 @@ namespace GUI
 
 
         }
-        private void deleteCustomer_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
-        {
-            consumerService = new ConsumerService();
-            if (CustomersListView.SelectedItem is Consumer selectedConsumer)
-            {
-                consumerService = new ConsumerService();
-                consumerService.DeleteConsumer(selectedConsumer);
-
-                MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadConsumers();
-
-
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn một khách hàng để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
 
         private void closeBorder_addCustomer(object sender, RoutedEventArgs e)
         {
